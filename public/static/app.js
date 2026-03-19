@@ -80,7 +80,7 @@
     }
     container.appendChild(frag);
   }
-  for (let i = 1; i <= 5; i++) buildParticles(`particles${i}`, 25);
+  for (let i = 1; i <= 4; i++) buildParticles(`particles${i}`, 25);
 
   /* ─── CTA STARS ─── */
   (function buildCtaStars() {
@@ -155,7 +155,7 @@
   }
 
   /* ─── JOURNEY NODES ACTIVATION ─── */
-  const stageIds = ['hero', 'stage-1', 'stage-2', 'stage-3', 'stage-4', 'stage-5'];
+  const stageIds = ['hero', 'chapter-1', 'chapter-2', 'chapter-3', 'chapter-4'];
   function updateJourneyNodes() {
     const jpNodes = document.querySelectorAll('.jp-node');
     let active = 0;
@@ -176,15 +176,15 @@
     const nodes = document.querySelectorAll('.timeline-node');
     const progress = document.getElementById('timelineProgress');
     let active = 0;
-    for (let i = 1; i <= 5; i++) {
-      const el = document.getElementById('stage-' + i);
+    for (let i = 1; i <= 4; i++) {
+      const el = document.getElementById('chapter-' + i);
       if (!el) continue;
       if (el.getBoundingClientRect().top <= window.innerHeight * 0.6) active = i;
     }
     nodes.forEach((n, i) => {
       n.classList.toggle('active', i === active);
     });
-    if (progress) progress.style.width = (active / 4 * 100) + '%';
+    if (progress) progress.style.width = (active / 3 * 100) + '%';
   }
 
   /* ─── INTERSECTION OBSERVER (fade-up) ─── */
@@ -257,12 +257,12 @@
         mobileMenu.className = 'nav-mobile-menu';
         mobileMenu.innerHTML = `
           <a href="#hero">Home</a>
-          <a href="#stage-1">Stage 1 — Junior Guardian</a>
-          <a href="#stage-2">Stage 2 — Mission Specialist</a>
-          <a href="#stage-3">Stage 3 — Team Commander</a>
-          <a href="#stage-4">Stage 4 — Strategic Visionary</a>
-          <a href="#stage-5">Stage 5 — All-Around Leader</a>
-          <a href="#begin">Begin Journey</a>
+          <a href="#chapter-1">01 — Foundations</a>
+          <a href="#chapter-2">02 — The Crucible</a>
+          <a href="#chapter-3">03 — Who I Am Now</a>
+          <a href="#chapter-4">04 — The North Star</a>
+          <a href="#values">Values</a>
+          <a href="#future">The Future</a>
         `;
         document.getElementById('navbar').after(mobileMenu);
         mobileMenu.querySelectorAll('a').forEach(a => {
@@ -344,6 +344,6 @@
     arms[2].style.setProperty('--start-angle', '240deg');
   }
 
-  console.log('%c🚀 USSF Guardian Leadership Journey Loaded', 'color:#00d4ff;font-size:14px;font-weight:bold;');
+  console.log('%c🚀 TSgt Evelyn Davis — Leadership Journey Loaded', 'color:#00d4ff;font-size:14px;font-weight:bold;');
 
 })();

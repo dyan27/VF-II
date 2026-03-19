@@ -3,20 +3,18 @@ import { serveStatic } from 'hono/cloudflare-workers'
 import { renderer } from './renderer'
 
 const app = new Hono()
-
-// Serve static assets
 app.use('/static/*', serveStatic({ root: './' }))
-
 app.use(renderer)
 
 app.get('/', (c) => {
   return c.render(
     <div id="root">
+
       {/* ── NAV ── */}
       <nav id="navbar">
         <div class="nav-inner">
           <div class="nav-logo">
-            <svg class="ussf-emblem" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="ussf-emblem" viewBox="0 0 48 48" fill="none">
               <circle cx="24" cy="24" r="22" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.6"/>
               <circle cx="24" cy="24" r="14" stroke="#00d4ff" stroke-width="1" fill="none" opacity="0.4"/>
               <ellipse cx="24" cy="24" rx="22" ry="8" stroke="#00d4ff" stroke-width="1" fill="none" opacity="0.5" transform="rotate(-20 24 24)"/>
@@ -24,16 +22,19 @@ app.get('/', (c) => {
               <line x1="24" y1="2" x2="24" y2="46" stroke="#00d4ff" stroke-width="0.5" opacity="0.3"/>
               <line x1="2" y1="24" x2="46" y2="24" stroke="#00d4ff" stroke-width="0.5" opacity="0.3"/>
             </svg>
-            <span class="nav-title">USSF GUARDIAN JOURNEY</span>
+            <div class="nav-logo-text">
+              <span class="nav-name">TSgt Evelyn Davis</span>
+              <span class="nav-sub">USSF · Leadership Journey</span>
+            </div>
           </div>
           <ul class="nav-links">
             <li><a href="#hero">Home</a></li>
-            <li><a href="#stage-1">Origins</a></li>
-            <li><a href="#stage-2">Mission</a></li>
-            <li><a href="#stage-3">Command</a></li>
-            <li><a href="#stage-4">Vision</a></li>
-            <li><a href="#stage-5">Legacy</a></li>
-            <li><a href="#begin" class="nav-cta">Begin Journey</a></li>
+            <li><a href="#chapter-1">Foundations</a></li>
+            <li><a href="#chapter-2">The Crucible</a></li>
+            <li><a href="#chapter-3">Now</a></li>
+            <li><a href="#chapter-4">North Star</a></li>
+            <li><a href="#values">Values</a></li>
+            <li><a href="#future" class="nav-cta">The Future</a></li>
           </ul>
           <button class="hamburger" id="hamburger" aria-label="Menu">
             <span></span><span></span><span></span>
@@ -41,30 +42,43 @@ app.get('/', (c) => {
         </div>
       </nav>
 
-      {/* ── HERO ── */}
+      {/* ══════════════════════════
+          HERO — OPENING STATEMENT
+          ══════════════════════════ */}
       <section id="hero" class="section hero-section">
         <div class="star-field" id="starField"></div>
         <div class="nebula-bg"></div>
-        <div class="mouse-layer" id="mouseLayer">
+        <div class="mouse-layer">
           <div class="mouse-orb orb-1" data-depth="0.04"></div>
           <div class="mouse-orb orb-2" data-depth="0.07"></div>
           <div class="mouse-orb orb-3" data-depth="0.02"></div>
           <div class="mouse-orb orb-4" data-depth="0.09"></div>
           <div class="mouse-orb orb-5" data-depth="0.05"></div>
         </div>
-        <div class="hero-content" id="heroContent">
-          <div class="hero-eyebrow fade-up">UNITED STATES SPACE FORCE</div>
+
+        <div class="hero-content">
+          <div class="hero-eyebrow fade-up">
+            <span class="eyebrow-dot"></span>
+            UNITED STATES SPACE FORCE · TECHNICAL SERGEANT
+            <span class="eyebrow-dot"></span>
+          </div>
           <h1 class="hero-headline fade-up delay-1">
-            From Guardian<br/>
-            <span class="gradient-text">to Leader.</span>
+            Evelyn<br/>
+            <span class="gradient-text">Davis.</span>
           </h1>
-          <p class="hero-sub fade-up delay-2">
-            An immersive journey through the five stages of Space Force leadership development — forging the guardians who will protect humanity's future among the stars.
+          <p class="hero-tagline fade-up delay-2">
+            Cyber Operator. Space Tester. Bridge Builder.
           </p>
-          <div class="hero-cta-row fade-up delay-3">
-            <a href="#stage-1" class="btn-primary">Begin the Journey</a>
-            <a href="#overview" class="btn-ghost">
-              <i class="fas fa-play-circle"></i> Watch Overview
+          <p class="hero-sub fade-up delay-3">
+            Eight years. Four bases. Three specialties. One unwavering truth —
+            <em> the mission only wins when people and technology move together.</em>
+          </p>
+          <div class="hero-cta-row fade-up delay-4">
+            <a href="#chapter-1" class="btn-primary">
+              <i class="fas fa-arrow-down"></i> Begin My Journey
+            </a>
+            <a href="#future" class="btn-ghost">
+              <i class="fas fa-star"></i> See Where I'm Headed
             </a>
           </div>
           <div class="hero-scroll-hint fade-up delay-4">
@@ -72,6 +86,7 @@ app.get('/', (c) => {
             <div class="scroll-arrow"></div>
           </div>
         </div>
+
         <div class="hero-planet-wrap">
           <div class="hero-planet" id="heroPlanet">
             <div class="planet-core"></div>
@@ -82,69 +97,72 @@ app.get('/', (c) => {
             <div class="planet-atmosphere"></div>
           </div>
         </div>
+
         <div class="hero-stats fade-up delay-4">
           <div class="stat-item">
-            <span class="stat-num" data-target="5">0</span>
-            <span class="stat-label">Leadership Stages</span>
+            <span class="stat-num" data-target="8">0</span>
+            <span class="stat-label">Years Serving</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-num" data-target="16000">0</span>
-            <span class="stat-label">Active Guardians</span>
+            <span class="stat-num" data-target="4">0</span>
+            <span class="stat-label">Bases</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-num" data-target="365">0</span>
-            <span class="stat-label">Days a Year, 24/7</span>
+            <span class="stat-num" data-target="3">0</span>
+            <span class="stat-label">Specialties</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="1">0</span>
+            <span class="stat-label">Mission Focus</span>
           </div>
         </div>
       </section>
 
-      {/* ── OVERVIEW ── */}
+      {/* ══════════════════════════
+          CHAPTER OVERVIEW STRIP
+          ══════════════════════════ */}
       <section id="overview" class="section overview-section">
         <div class="section-inner">
-          <div class="overline fade-up">THE FRAMEWORK</div>
-          <h2 class="section-title fade-up delay-1">Five Stages.<br/>One Extraordinary Leader.</h2>
+          <div class="overline fade-up">THE STORY SO FAR</div>
+          <h2 class="section-title fade-up delay-1">A Journey Shaped<br/>by Real Decisions.</h2>
           <p class="section-body fade-up delay-2">
-            The Guardian Leadership Development Framework is a deliberate, progressive journey that transforms individuals into the mission-ready, values-driven leaders the Space Force demands.
+            This isn't a résumé. It's the honest account of a leader who learned by doing —
+            who built credibility in the gap between technical truth and operational reality,
+            and who leads today with the scars and wisdom of both.
           </p>
           <div class="journey-timeline fade-up delay-3">
             <div class="timeline-track"></div>
             <div class="timeline-progress" id="timelineProgress"></div>
             <div class="timeline-nodes">
-              <a href="#stage-1" class="timeline-node active" data-stage="1">
+              <a href="#chapter-1" class="timeline-node active" data-stage="1">
                 <div class="node-dot"></div>
                 <div class="node-label">
                   <span class="node-num">01</span>
-                  <span class="node-name">Junior Guardian</span>
+                  <span class="node-name">Foundations</span>
                 </div>
               </a>
-              <a href="#stage-2" class="timeline-node" data-stage="2">
+              <a href="#chapter-2" class="timeline-node" data-stage="2">
                 <div class="node-dot"></div>
                 <div class="node-label">
                   <span class="node-num">02</span>
-                  <span class="node-name">Mission Specialist</span>
+                  <span class="node-name">The Crucible</span>
                 </div>
               </a>
-              <a href="#stage-3" class="timeline-node" data-stage="3">
+              <a href="#chapter-3" class="timeline-node" data-stage="3">
                 <div class="node-dot"></div>
                 <div class="node-label">
                   <span class="node-num">03</span>
-                  <span class="node-name">Team Commander</span>
+                  <span class="node-name">Who I Am Now</span>
                 </div>
               </a>
-              <a href="#stage-4" class="timeline-node" data-stage="4">
+              <a href="#chapter-4" class="timeline-node" data-stage="4">
                 <div class="node-dot"></div>
                 <div class="node-label">
                   <span class="node-num">04</span>
-                  <span class="node-name">Strategic Visionary</span>
-                </div>
-              </a>
-              <a href="#stage-5" class="timeline-node" data-stage="5">
-                <div class="node-dot"></div>
-                <div class="node-label">
-                  <span class="node-num">05</span>
-                  <span class="node-name">All-Around Leader</span>
+                  <span class="node-name">The North Star</span>
                 </div>
               </a>
             </div>
@@ -152,8 +170,11 @@ app.get('/', (c) => {
         </div>
       </section>
 
-      {/* ── STAGE 1: JUNIOR GUARDIAN ── */}
-      <section id="stage-1" class="section stage-section stage-1-section" data-stage="1">
+      {/* ══════════════════════════════════
+          CHAPTER 1 — FOUNDATIONS
+          Cyber Operator · Early Years
+          ══════════════════════════════════ */}
+      <section id="chapter-1" class="section stage-section stage-1-section" data-stage="1">
         <div class="stage-bg">
           <div class="stage-particles" id="particles1"></div>
           <div class="stage-gradient s1-gradient"></div>
@@ -165,47 +186,50 @@ app.get('/', (c) => {
         <div class="stage-inner">
           <div class="stage-badge fade-up">
             <span class="stage-num">01</span>
-            <span class="stage-tag">STAGE ONE</span>
+            <span class="stage-tag">CHAPTER ONE · FOUNDATIONS</span>
           </div>
           <div class="stage-content-grid">
             <div class="stage-text">
-              <h2 class="stage-title fade-up delay-1">Junior<br/><span class="accent-text">Guardian</span></h2>
+              <h2 class="stage-title fade-up delay-1">Learning to<br/><span class="accent-text">Operate.</span></h2>
               <p class="stage-desc fade-up delay-2">
-                Every legend begins with a first step. As a Junior Guardian, you are welcomed into the ranks of the world's newest and most advanced military branch. This is where foundation is built — values forged, purpose discovered, and identity transformed.
+                I came in as a cyber offensive operator — learning to think like the adversary, to find the seam, to move without being seen. Then I crossed to the defensive side. Two lenses. Same domain. That duality became the first foundational shift in how I understood the mission.
+              </p>
+              <p class="stage-desc fade-up delay-2" style="margin-top:-16px">
+                Early on, I was all execution. Learning the craft, absorbing doctrine, proving myself technically. But somewhere between my first base and my second, I started noticing something: the best operators weren't just skilled — they understood <em>why</em> every action mattered to the mission above them.
               </p>
               <div class="stage-pillars fade-up delay-3">
                 <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-shield-alt"></i></div>
+                  <div class="pillar-icon"><i class="fas fa-crosshairs"></i></div>
                   <div class="pillar-text">
-                    <strong>Core Values</strong>
-                    <p>Character, Courage, and Commitment form the bedrock of every Guardian's identity.</p>
+                    <strong>Cyber Offensive Operator</strong>
+                    <p>Learned adversarial thinking — how to find vulnerabilities before the enemy does and exploit them with precision.</p>
                   </div>
                 </div>
                 <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-compass"></i></div>
+                  <div class="pillar-icon"><i class="fas fa-shield-alt"></i></div>
                   <div class="pillar-text">
-                    <strong>Orientation</strong>
-                    <p>Understand the Space Force mission, doctrine, and your role in protecting the space domain.</p>
+                    <strong>Cyber Defensive Operator</strong>
+                    <p>Flipped perspective to protect — applied offensive knowledge to harden systems from the inside out.</p>
+                  </div>
+                </div>
+                <div class="pillar-item">
+                  <div class="pillar-icon"><i class="fas fa-map-marker-alt"></i></div>
+                  <div class="pillar-text">
+                    <strong>4 Bases, 1 Identity</strong>
+                    <p>Every assignment brought a new team, new mission, new environment. I learned to adapt fast and contribute immediately.</p>
                   </div>
                 </div>
                 <div class="pillar-item">
                   <div class="pillar-icon"><i class="fas fa-brain"></i></div>
                   <div class="pillar-text">
-                    <strong>Self-Awareness</strong>
-                    <p>Develop emotional intelligence and recognize your strengths as a new member of the team.</p>
-                  </div>
-                </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-users"></i></div>
-                  <div class="pillar-text">
-                    <strong>Team Integration</strong>
-                    <p>Learn the power of Guardian Cohort — a unique culture of inclusion, trust, and mutual respect.</p>
+                    <strong>The "Why" Shift</strong>
+                    <p>Moved from executing tasks to understanding mission context — the moment that separated technicians from leaders.</p>
                   </div>
                 </div>
               </div>
               <div class="stage-milestone fade-up delay-4">
-                <div class="milestone-label">Key Milestone</div>
-                <div class="milestone-text">Complete Guardian Orientation and receive your first mission assignment</div>
+                <div class="milestone-label">What This Chapter Built</div>
+                <div class="milestone-text">Dual-domain expertise and the discipline to master complexity — the technical credibility that would later let me lead with authority, not just authority by rank.</div>
               </div>
             </div>
             <div class="stage-visual">
@@ -215,20 +239,32 @@ app.get('/', (c) => {
                     <div class="icon-ring r1"></div>
                     <div class="icon-ring r2"></div>
                     <div class="icon-ring r3"></div>
-                    <div class="central-icon"><i class="fas fa-star"></i></div>
+                    <div class="central-icon"><i class="fas fa-terminal"></i></div>
                   </div>
-                  <div class="viz-label">Junior Guardian</div>
-                  <div class="viz-rank">E-1 through E-4</div>
+                  <div class="viz-label">Cyber Operator</div>
+                  <div class="viz-rank">Offensive · Defensive · Space Test</div>
                   <div class="viz-traits">
-                    <span>Curious</span>
-                    <span>Dedicated</span>
-                    <span>Eager</span>
-                    <span>Adaptable</span>
+                    <span>Dual-Domain</span>
+                    <span>Disciplined</span>
+                    <span>Mission-Driven</span>
+                    <span>Adaptive</span>
                   </div>
                 </div>
                 <div class="viz-quote">
                   <i class="fas fa-quote-left"></i>
-                  <p>"A guardian is not just a rank — it is a calling to serve beyond the horizon."</p>
+                  <p>"I didn't just learn to operate — I learned to see the system whole. Offense taught me where systems break. Defense taught me how to make them hold."</p>
+                </div>
+                <div class="base-timeline">
+                  <div class="base-label">The Journey</div>
+                  <div class="base-nodes">
+                    <div class="base-node active"><span>Base 1</span><small>Offensive Ops</small></div>
+                    <div class="base-connector"></div>
+                    <div class="base-node active"><span>Base 2</span><small>Defensive Ops</small></div>
+                    <div class="base-connector"></div>
+                    <div class="base-node active"><span>Base 3</span><small>Space Test</small></div>
+                    <div class="base-connector"></div>
+                    <div class="base-node active"><span>Base 4</span><small>TSgt · Now</small></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -240,8 +276,11 @@ app.get('/', (c) => {
         </div>
       </section>
 
-      {/* ── STAGE 2: MISSION SPECIALIST ── */}
-      <section id="stage-2" class="section stage-section stage-2-section" data-stage="2">
+      {/* ══════════════════════════════════════
+          CHAPTER 2 — THE CRUCIBLE
+          The Cyber vs. Ops Defining Moment
+          ══════════════════════════════════════ */}
+      <section id="chapter-2" class="section stage-section stage-2-section" data-stage="2">
         <div class="stage-bg">
           <div class="stage-particles" id="particles2"></div>
           <div class="stage-gradient s2-gradient"></div>
@@ -253,47 +292,62 @@ app.get('/', (c) => {
         <div class="stage-inner">
           <div class="stage-badge fade-up">
             <span class="stage-num">02</span>
-            <span class="stage-tag">STAGE TWO</span>
+            <span class="stage-tag">CHAPTER TWO · THE CRUCIBLE</span>
           </div>
           <div class="stage-content-grid reverse">
             <div class="stage-text">
-              <h2 class="stage-title fade-up delay-1">Mission<br/><span class="accent-text">Specialist</span></h2>
-              <p class="stage-desc fade-up delay-2">
-                Mastery of your craft is the currency of credibility. As a Mission Specialist, you deepen your technical excellence and begin influencing your immediate environment. You are no longer just following — you are becoming the expert others look to.
+              <h2 class="stage-title fade-up delay-1">The Day Cyber<br/><span class="accent-text">Met Reality.</span></h2>
+
+              {/* Story callout */}
+              <div class="story-callout fade-up delay-2">
+                <div class="callout-bar"></div>
+                <div class="callout-content">
+                  <div class="callout-label">THE DEFINING MOMENT</div>
+                  <p>I was enforcing cybersecurity controls — patching schedules, access restrictions, system hardening — all technically correct. All mission-critical. And all met with resistance from operators who saw cyber as the enemy of readiness, not the enabler of it.</p>
+                </div>
+              </div>
+
+              <p class="stage-desc fade-up delay-3" style="margin-top:24px">
+                The mission owners weren't wrong to push back. Their timelines were real. Their pressures were real. What they lacked wasn't willingness — it was translation. Nobody had ever framed cyber risk in terms they used every day: mission degradation, sortie generation, system availability rates.
               </p>
+              <p class="stage-desc fade-up delay-3" style="margin-top:-16px">
+                So I changed the conversation. Instead of "you must patch by Friday," it became "here's what exposure looks like in operational terms — and here's a risk-prioritized timeline that protects both the mission and the network." I stopped being the compliance officer and became a mission partner.
+              </p>
+
               <div class="stage-pillars fade-up delay-3">
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-satellite"></i></div>
+                <div class="pillar-item highlight">
+                  <div class="pillar-icon"><i class="fas fa-language"></i></div>
                   <div class="pillar-text">
-                    <strong>Technical Mastery</strong>
-                    <p>Achieve expert-level proficiency in your space domain specialty — from orbital mechanics to cyber defense.</p>
+                    <strong>Translated Risk into Mission Terms</strong>
+                    <p>Reframed technical vulnerabilities as operational consequences — language mission owners actually used and acted on.</p>
                   </div>
                 </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-project-diagram"></i></div>
+                <div class="pillar-item highlight">
+                  <div class="pillar-icon"><i class="fas fa-balance-scale"></i></div>
                   <div class="pillar-text">
-                    <strong>Problem Solving</strong>
-                    <p>Apply critical thinking and analytical frameworks to complex, ambiguous mission challenges.</p>
+                    <strong>Risk-Based Prioritization</strong>
+                    <p>Replaced rigid compliance timelines with intelligent triage — highest risk first, mission tempo protected.</p>
                   </div>
                 </div>
-                <div class="pillar-item">
+                <div class="pillar-item highlight">
                   <div class="pillar-icon"><i class="fas fa-handshake"></i></div>
                   <div class="pillar-text">
-                    <strong>Peer Influence</strong>
-                    <p>Begin mentoring junior guardians and lead by example within your cohort.</p>
+                    <strong>Influence Without Authority</strong>
+                    <p>Had no command over mission owners. Built trust through credibility, clarity, and demonstrating shared stakes.</p>
                   </div>
                 </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-lightbulb"></i></div>
+                <div class="pillar-item highlight">
+                  <div class="pillar-icon"><i class="fas fa-bridge"></i></div>
                   <div class="pillar-text">
-                    <strong>Innovation Mindset</strong>
-                    <p>Embrace Space Force's culture of agility, commercial integration, and rapid capability development.</p>
+                    <strong>Became the Bridge</strong>
+                    <p>Technical teams spoke one language. Mission leaders spoke another. I learned to live in both.</p>
                   </div>
                 </div>
               </div>
+
               <div class="stage-milestone fade-up delay-4">
-                <div class="milestone-label">Key Milestone</div>
-                <div class="milestone-text">Earn your Space Force Specialty Code certification and lead your first technical brief</div>
+                <div class="milestone-label">What This Chapter Built</div>
+                <div class="milestone-text">The leadership lesson no classroom teaches: authority earns nothing. Credibility earns everything. This was where I stopped being a technician and started becoming a leader.</div>
               </div>
             </div>
             <div class="stage-visual">
@@ -303,25 +357,42 @@ app.get('/', (c) => {
                     <div class="icon-ring r1"></div>
                     <div class="icon-ring r2"></div>
                     <div class="icon-ring r3"></div>
-                    <div class="central-icon"><i class="fas fa-satellite-dish"></i></div>
+                    <div class="central-icon"><i class="fas fa-exchange-alt"></i></div>
                   </div>
-                  <div class="viz-label">Mission Specialist</div>
-                  <div class="viz-rank">E-5 through E-6 / O-1 through O-3</div>
+                  <div class="viz-label">The Bridge Builder</div>
+                  <div class="viz-rank">Influence · Translation · Trust</div>
                   <div class="viz-traits">
-                    <span>Expert</span>
-                    <span>Analytical</span>
-                    <span>Influential</span>
-                    <span>Innovative</span>
+                    <span>Persuasive</span>
+                    <span>Risk-Fluent</span>
+                    <span>Credible</span>
+                    <span>Principled</span>
                   </div>
                 </div>
-                <div class="orbit-visual">
-                  <div class="orbit-ring or1">
-                    <div class="orbit-dot"></div>
+
+                {/* Tension diagram */}
+                <div class="tension-diagram">
+                  <div class="tension-side ts-left">
+                    <div class="tension-icon"><i class="fas fa-lock"></i></div>
+                    <div class="tension-label">Cyber Standards</div>
+                    <div class="tension-sub">Compliance · Hardening · Risk</div>
                   </div>
-                  <div class="orbit-ring or2">
-                    <div class="orbit-dot"></div>
+                  <div class="tension-bridge">
+                    <div class="bridge-line bl-1"></div>
+                    <div class="bridge-center">
+                      <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="bridge-line bl-2"></div>
                   </div>
-                  <div class="orbit-center"><i class="fas fa-globe"></i></div>
+                  <div class="tension-side ts-right">
+                    <div class="tension-icon"><i class="fas fa-fighter-jet"></i></div>
+                    <div class="tension-label">Operational Tempo</div>
+                    <div class="tension-sub">Readiness · Speed · Mission</div>
+                  </div>
+                </div>
+
+                <div class="viz-quote">
+                  <i class="fas fa-quote-left"></i>
+                  <p>"The resistance wasn't obstruction — it was a gap I hadn't filled yet. Once I filled it, the resistance became partnership."</p>
                 </div>
               </div>
             </div>
@@ -333,8 +404,11 @@ app.get('/', (c) => {
         </div>
       </section>
 
-      {/* ── STAGE 3: TEAM COMMANDER ── */}
-      <section id="stage-3" class="section stage-section stage-3-section" data-stage="3">
+      {/* ══════════════════════════════════
+          CHAPTER 3 — WHO I AM NOW
+          TSgt · Current Leadership Identity
+          ══════════════════════════════════ */}
+      <section id="chapter-3" class="section stage-section stage-3-section" data-stage="3">
         <div class="stage-bg">
           <div class="stage-particles" id="particles3"></div>
           <div class="stage-gradient s3-gradient"></div>
@@ -346,47 +420,59 @@ app.get('/', (c) => {
         <div class="stage-inner">
           <div class="stage-badge fade-up">
             <span class="stage-num">03</span>
-            <span class="stage-tag">STAGE THREE</span>
+            <span class="stage-tag">CHAPTER THREE · WHO I AM NOW</span>
           </div>
           <div class="stage-content-grid">
             <div class="stage-text">
-              <h2 class="stage-title fade-up delay-1">Team<br/><span class="accent-text">Commander</span></h2>
+              <h2 class="stage-title fade-up delay-1">Calm in<br/><span class="accent-text">the Storm.</span></h2>
               <p class="stage-desc fade-up delay-2">
-                Leadership is a responsibility, not a privilege. As a Team Commander, you carry the weight of your unit's performance, morale, and readiness. You inspire, you develop, you make the hard calls — because the mission and the people depend on you.
+                Eight years in, this is who I've become. Not by accident — by deliberate choice in every high-pressure moment, every difficult conversation, every time I had to hold the line and still keep the team moving forward.
               </p>
-              <div class="stage-pillars fade-up delay-3">
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-users-cog"></i></div>
-                  <div class="pillar-text">
-                    <strong>People Development</strong>
-                    <p>Coach, mentor, and develop the full potential of each Guardian under your command.</p>
+
+              {/* Leadership Traits — personal, specific */}
+              <div class="trait-list fade-up delay-3">
+                <div class="trait-item">
+                  <div class="trait-number">01</div>
+                  <div class="trait-content">
+                    <div class="trait-title">Calm Under Pressure</div>
+                    <div class="trait-desc">When incidents hit and systems go down, I'm the one bringing structure and focus — not adding to the noise. Calm isn't passive. It's active leadership when chaos earns the room.</div>
                   </div>
                 </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-tasks"></i></div>
-                  <div class="pillar-text">
-                    <strong>Mission Execution</strong>
-                    <p>Plan, direct, and execute complex multi-domain missions with clarity and decisive action.</p>
+                <div class="trait-item">
+                  <div class="trait-number">02</div>
+                  <div class="trait-content">
+                    <div class="trait-title">Clear and Direct</div>
+                    <div class="trait-desc">People know the priority. They know their role. They know why it matters. I don't believe in ambiguous guidance — clarity is a form of respect for the people I lead.</div>
                   </div>
                 </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-balance-scale"></i></div>
-                  <div class="pillar-text">
-                    <strong>Ethical Leadership</strong>
-                    <p>Model integrity and make values-based decisions even under pressure and ambiguity.</p>
+                <div class="trait-item">
+                  <div class="trait-number">03</div>
+                  <div class="trait-content">
+                    <div class="trait-title">Developer of People</div>
+                    <div class="trait-desc">I invest in the "why," not just the "how." Technical skills decay. Understanding — the kind that makes someone adaptable — that lasts. That's what I try to build in my people.</div>
                   </div>
                 </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-comments"></i></div>
-                  <div class="pillar-text">
-                    <strong>Communication</strong>
-                    <p>Master the art of clear, direct, and inspiring communication across all levels.</p>
+                <div class="trait-item">
+                  <div class="trait-number">04</div>
+                  <div class="trait-content">
+                    <div class="trait-title">Technical-Operational Bridge</div>
+                    <div class="trait-desc">I can take a complex cyber issue and put it in front of a wing commander in three sentences. That translation isn't just communication — it's how decisions get made and missions stay protected.</div>
                   </div>
                 </div>
-              </div>
-              <div class="stage-milestone fade-up delay-4">
-                <div class="milestone-label">Key Milestone</div>
-                <div class="milestone-text">Assume command of a Flight/Squadron and lead your first operational mission cycle</div>
+                <div class="trait-item">
+                  <div class="trait-number">05</div>
+                  <div class="trait-content">
+                    <div class="trait-title">Standards with Flexibility</div>
+                    <div class="trait-desc">I hold the line on what matters. But I'm outcomes-focused, not process-obsessed. Rigid compliance without judgment isn't leadership — it's administration.</div>
+                  </div>
+                </div>
+                <div class="trait-item">
+                  <div class="trait-number">06</div>
+                  <div class="trait-content">
+                    <div class="trait-title">Lead with Intent, Not Control</div>
+                    <div class="trait-desc">I set the mission priority. I set the standard. Then I get out of the way and let my people own it. The best leadership decision I ever made was trusting my team to lead themselves.</div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="stage-visual">
@@ -396,27 +482,49 @@ app.get('/', (c) => {
                     <div class="icon-ring r1"></div>
                     <div class="icon-ring r2"></div>
                     <div class="icon-ring r3"></div>
-                    <div class="central-icon"><i class="fas fa-crown"></i></div>
+                    <div class="central-icon"><i class="fas fa-anchor"></i></div>
                   </div>
-                  <div class="viz-label">Team Commander</div>
-                  <div class="viz-rank">E-7 through E-9 / O-4 through O-5</div>
+                  <div class="viz-label">TSgt Evelyn Davis</div>
+                  <div class="viz-rank">Technical Sergeant · Space Force</div>
                   <div class="viz-traits">
+                    <span>Calm</span>
+                    <span>Clear</span>
                     <span>Decisive</span>
-                    <span>Inspiring</span>
-                    <span>Accountable</span>
-                    <span>Empathetic</span>
+                    <span>Trusted</span>
                   </div>
                 </div>
-                <div class="command-grid">
-                  <div class="cmd-node cmd-center"><i class="fas fa-user-tie"></i></div>
-                  <div class="cmd-node cmd-a"><i class="fas fa-user"></i></div>
-                  <div class="cmd-node cmd-b"><i class="fas fa-user"></i></div>
-                  <div class="cmd-node cmd-c"><i class="fas fa-user"></i></div>
-                  <div class="cmd-node cmd-d"><i class="fas fa-user"></i></div>
-                  <div class="cmd-line line-a"></div>
-                  <div class="cmd-line line-b"></div>
-                  <div class="cmd-line line-c"></div>
-                  <div class="cmd-line line-d"></div>
+
+                {/* Leadership radar */}
+                <div class="leadership-radar">
+                  <div class="radar-label">Leadership Profile</div>
+                  <div class="radar-wrap">
+                    <svg class="radar-svg" viewBox="0 0 200 200">
+                      <polygon points="100,20 168,60 168,140 100,180 32,140 32,60" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="1"/>
+                      <polygon points="100,45 148,72 148,128 100,155 52,128 52,72" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="1"/>
+                      <polygon points="100,70 128,85 128,115 100,130 72,115 72,85" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="1"/>
+                      <polygon points="100,15 162,55 170,142 100,184 30,142 38,55" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
+                      <circle cx="100" cy="15" r="3" fill="#00d4ff"/>
+                      <circle cx="162" cy="55" r="3" fill="#00d4ff"/>
+                      <circle cx="170" cy="142" r="3" fill="#00d4ff"/>
+                      <circle cx="100" cy="184" r="3" fill="#00d4ff"/>
+                      <circle cx="30" cy="142" r="3" fill="#00d4ff"/>
+                      <circle cx="38" cy="55" r="3" fill="#00d4ff"/>
+                    </svg>
+                    <div class="radar-labels">
+                      <span class="rl rl-top">Calm</span>
+                      <span class="rl rl-tr">Clear</span>
+                      <span class="rl rl-br">Decisive</span>
+                      <span class="rl rl-bot">Developer</span>
+                      <span class="rl rl-bl">Bridge</span>
+                      <span class="rl rl-tl">Intent</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="viz-quote">
+                  <i class="fas fa-quote-left"></i>
+                  <p>"I want to be the leader people rely on during high-pressure moments — someone who brings calm, structure, and decisive action when it matters most."</p>
+                  <div class="quote-attr">— Evelyn Davis</div>
                 </div>
               </div>
             </div>
@@ -428,8 +536,11 @@ app.get('/', (c) => {
         </div>
       </section>
 
-      {/* ── STAGE 4: STRATEGIC VISIONARY ── */}
-      <section id="stage-4" class="section stage-section stage-4-section" data-stage="4">
+      {/* ══════════════════════════════════════
+          CHAPTER 4 — THE NORTH STAR
+          Who Evelyn Wants to Become
+          ══════════════════════════════════════ */}
+      <section id="chapter-4" class="section stage-section stage-4-section" data-stage="4">
         <div class="stage-bg">
           <div class="stage-particles" id="particles4"></div>
           <div class="stage-gradient s4-gradient"></div>
@@ -441,47 +552,49 @@ app.get('/', (c) => {
         <div class="stage-inner">
           <div class="stage-badge fade-up">
             <span class="stage-num">04</span>
-            <span class="stage-tag">STAGE FOUR</span>
+            <span class="stage-tag">CHAPTER FOUR · THE NORTH STAR</span>
           </div>
           <div class="stage-content-grid reverse">
             <div class="stage-text">
-              <h2 class="stage-title fade-up delay-1">Strategic<br/><span class="accent-text">Visionary</span></h2>
+              <h2 class="stage-title fade-up delay-1">The Leader<br/><span class="accent-text">I'm Becoming.</span></h2>
               <p class="stage-desc fade-up delay-2">
-                Strategy is leadership in four dimensions — space, time, domain, and consequence. As a Strategic Visionary, you shape the future of the Space Force. You think at the intersection of national security, technology, and geopolitics to define the battles of tomorrow.
+                I don't see this as a destination — I see it as a direction. Every assignment, every hard conversation, every person I develop is another degree on the bearing. This is where that bearing points.
               </p>
-              <div class="stage-pillars fade-up delay-3">
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-chess"></i></div>
-                  <div class="pillar-text">
-                    <strong>Strategic Thinking</strong>
-                    <p>Develop comprehensive strategies that span multi-domain operations and shape long-term outcomes.</p>
+
+              <div class="aspiration-cards fade-up delay-3">
+                <div class="asp-card">
+                  <div class="asp-icon"><i class="fas fa-anchor"></i></div>
+                  <div class="asp-content">
+                    <div class="asp-title">The Anchor in the Room</div>
+                    <div class="asp-desc">When the incident flares, when the pressure peaks, when everyone looks around for who's going to take charge — I want to be the calm that organizes the chaos. Not because of rank. Because of presence.</div>
                   </div>
                 </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-globe-americas"></i></div>
-                  <div class="pillar-text">
-                    <strong>Joint Operations</strong>
-                    <p>Lead integration across all military branches, allied nations, and commercial space partners.</p>
+                <div class="asp-card">
+                  <div class="asp-icon"><i class="fas fa-project-diagram"></i></div>
+                  <div class="asp-content">
+                    <div class="asp-title">Senior Cyber-Space Strategist</div>
+                    <div class="asp-desc">I want to shape how this force integrates cyber and space at the operational level — not just execute policy, but help write it. The gap between cyber teams and mission leaders is still too wide. I want to close it at scale.</div>
                   </div>
                 </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-landmark"></i></div>
-                  <div class="pillar-text">
-                    <strong>Policy Influence</strong>
-                    <p>Shape national space policy, acquisition strategy, and international space agreements.</p>
+                <div class="asp-card">
+                  <div class="asp-icon"><i class="fas fa-users"></i></div>
+                  <div class="asp-content">
+                    <div class="asp-title">The Leader Who Develops Leaders</div>
+                    <div class="asp-desc">My measure of success won't be the missions I ran — it'll be the people who grew under my mentorship and went on to lead their own teams better than I could have. That's the legacy I want.</div>
                   </div>
                 </div>
-                <div class="pillar-item">
-                  <div class="pillar-icon"><i class="fas fa-rocket"></i></div>
-                  <div class="pillar-text">
-                    <strong>Capability Innovation</strong>
-                    <p>Champion next-generation space capabilities and drive modernization of the space enterprise.</p>
+                <div class="asp-card">
+                  <div class="asp-icon"><i class="fas fa-globe"></i></div>
+                  <div class="asp-content">
+                    <div class="asp-title">Enterprise-Level Bridge Builder</div>
+                    <div class="asp-desc">Expand what I do today from flight-level to force-level. Take the translation skill — cyber risk to mission language — and apply it to joint operations, allied integration, and senior leadership engagement.</div>
                   </div>
                 </div>
               </div>
+
               <div class="stage-milestone fade-up delay-4">
-                <div class="milestone-label">Key Milestone</div>
-                <div class="milestone-text">Graduate from Senior Service School and receive your first O-6/Senior NCO command</div>
+                <div class="milestone-label">The Commitment</div>
+                <div class="milestone-text">To keep earning the trust of the people I lead — not through title, but through consistency, clarity, and showing up when it's hardest. That's the only leadership I believe in.</div>
               </div>
             </div>
             <div class="stage-visual">
@@ -491,23 +604,23 @@ app.get('/', (c) => {
                     <div class="icon-ring r1"></div>
                     <div class="icon-ring r2"></div>
                     <div class="icon-ring r3"></div>
-                    <div class="central-icon"><i class="fas fa-telescope"></i></div>
+                    <div class="central-icon"><i class="fas fa-compass"></i></div>
                   </div>
-                  <div class="viz-label">Strategic Visionary</div>
-                  <div class="viz-rank">O-6 / CMSgt and above</div>
+                  <div class="viz-label">Future Self</div>
+                  <div class="viz-rank">Senior NCO · Cyber-Space Strategist</div>
                   <div class="viz-traits">
-                    <span>Visionary</span>
-                    <span>Strategic</span>
-                    <span>Transformative</span>
-                    <span>Diplomatic</span>
+                    <span>Mentor</span>
+                    <span>Strategist</span>
+                    <span>Architect</span>
+                    <span>Trusted</span>
                   </div>
                 </div>
                 <div class="strategy-map">
                   <div class="map-node mn-center"><i class="fas fa-star"></i></div>
                   <div class="map-ring mr1">
-                    <div class="map-node mn-a"><i class="fas fa-satellite"></i></div>
-                    <div class="map-node mn-b"><i class="fas fa-globe"></i></div>
-                    <div class="map-node mn-c"><i class="fas fa-flag"></i></div>
+                    <div class="map-node mn-a"><i class="fas fa-users"></i></div>
+                    <div class="map-node mn-b"><i class="fas fa-shield-alt"></i></div>
+                    <div class="map-node mn-c"><i class="fas fa-satellite"></i></div>
                   </div>
                   <div class="map-ring mr2">
                     <div class="map-node mn-d"></div>
@@ -517,6 +630,11 @@ app.get('/', (c) => {
                     <div class="map-node mn-h"></div>
                     <div class="map-node mn-i"></div>
                   </div>
+                </div>
+                <div class="viz-quote">
+                  <i class="fas fa-quote-left"></i>
+                  <p>"The distance between TSgt and the leader I want to be isn't measured in promotions. It's measured in the depth of impact I leave behind."</p>
+                  <div class="quote-attr">— Evelyn Davis</div>
                 </div>
               </div>
             </div>
@@ -528,147 +646,79 @@ app.get('/', (c) => {
         </div>
       </section>
 
-      {/* ── STAGE 5: ALL-AROUND LEADER ── */}
-      <section id="stage-5" class="section stage-section stage-5-section" data-stage="5">
-        <div class="stage-bg">
-          <div class="stage-particles" id="particles5"></div>
-          <div class="stage-gradient s5-gradient"></div>
-        </div>
-        <div class="stage-mouse-wrap">
-          <div class="stage-orb s5-orb-a" data-depth="0.06"></div>
-          <div class="stage-orb s5-orb-b" data-depth="0.04"></div>
-          <div class="stage-orb s5-orb-c" data-depth="0.08"></div>
-        </div>
-        <div class="stage-inner">
-          <div class="stage-badge fade-up gold">
-            <span class="stage-num">05</span>
-            <span class="stage-tag">STAGE FIVE — THE PINNACLE</span>
-          </div>
-          <div class="stage-content-grid">
-            <div class="stage-text">
-              <h2 class="stage-title fade-up delay-1">All-Around<br/><span class="accent-text gold">Leader</span></h2>
-              <p class="stage-desc fade-up delay-2">
-                The All-Around Leader is the embodiment of everything the Space Force stands for. You are simultaneously a warrior, a diplomat, an innovator, a mentor, and a steward of the force. Your legacy is not measured in missions — it is measured in the leaders you leave behind.
-              </p>
-              <div class="stage-pillars fade-up delay-3">
-                <div class="pillar-item gold">
-                  <div class="pillar-icon"><i class="fas fa-infinity"></i></div>
-                  <div class="pillar-text">
-                    <strong>Legacy Building</strong>
-                    <p>Create lasting institutional culture, mentor the next generation, and shape the Space Force's identity for decades.</p>
-                  </div>
-                </div>
-                <div class="pillar-item gold">
-                  <div class="pillar-icon"><i class="fas fa-network-wired"></i></div>
-                  <div class="pillar-text">
-                    <strong>Enterprise Leadership</strong>
-                    <p>Lead across the entire Space Force enterprise — budget, policy, operations, and people simultaneously.</p>
-                  </div>
-                </div>
-                <div class="pillar-item gold">
-                  <div class="pillar-icon"><i class="fas fa-award"></i></div>
-                  <div class="pillar-text">
-                    <strong>Character Excellence</strong>
-                    <p>Demonstrate the highest standards of integrity, resilience, and servant leadership in every action.</p>
-                  </div>
-                </div>
-                <div class="pillar-item gold">
-                  <div class="pillar-icon"><i class="fas fa-meteor"></i></div>
-                  <div class="pillar-text">
-                    <strong>Mission Transformation</strong>
-                    <p>Redefine what is possible in the space domain — from low-earth orbit to deep space operations.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="stage-milestone fade-up delay-4 gold-milestone">
-                <div class="milestone-label">The Pinnacle</div>
-                <div class="milestone-text">General Officer / Senior Executive — Guardian of Guardians, Shaper of the Space Force's future</div>
-              </div>
-            </div>
-            <div class="stage-visual">
-              <div class="stage-viz-wrap fade-up delay-2">
-                <div class="viz-card s5-card">
-                  <div class="viz-icon-ring gold-ring">
-                    <div class="icon-ring r1"></div>
-                    <div class="icon-ring r2"></div>
-                    <div class="icon-ring r3"></div>
-                    <div class="central-icon gold-icon"><i class="fas fa-star"></i></div>
-                  </div>
-                  <div class="viz-label">All-Around Leader</div>
-                  <div class="viz-rank">General Officer / Senior Executive</div>
-                  <div class="viz-traits gold-traits">
-                    <span>Legendary</span>
-                    <span>Transformative</span>
-                    <span>Selfless</span>
-                    <span>Eternal</span>
-                  </div>
-                </div>
-                <div class="galaxy-visual">
-                  <div class="galaxy-core"></div>
-                  <div class="galaxy-arm arm-1"></div>
-                  <div class="galaxy-arm arm-2"></div>
-                  <div class="galaxy-arm arm-3"></div>
-                  <div class="galaxy-star gs-1"></div>
-                  <div class="galaxy-star gs-2"></div>
-                  <div class="galaxy-star gs-3"></div>
-                  <div class="galaxy-star gs-4"></div>
-                  <div class="galaxy-star gs-5"></div>
-                  <div class="galaxy-star gs-6"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── VALUES PILLARS ── */}
+      {/* ══════════════════════════
+          VALUES — Evelyn's Own
+          ══════════════════════════ */}
       <section id="values" class="section values-section">
         <div class="section-inner">
-          <div class="overline fade-up">GUARDIAN ETHOS</div>
-          <h2 class="section-title fade-up delay-1">The Values That<br/>Guide Every Stage</h2>
-          <div class="values-grid fade-up delay-2">
+          <div class="overline fade-up">WHAT DRIVES ME</div>
+          <h2 class="section-title fade-up delay-1">Six Principles.<br/>Earned, Not Assigned.</h2>
+          <p class="section-body fade-up delay-2">
+            These aren't values I inherited from a doctrine pamphlet. They're the ones I've lived — tested in real decisions, real friction, real moments where the easier path was wrong.
+          </p>
+          <div class="values-grid fade-up delay-3">
             <div class="value-card" data-index="0">
               <div class="value-icon-wrap">
                 <div class="value-hex"></div>
-                <i class="fas fa-shield-alt value-icon"></i>
+                <i class="fas fa-water value-icon"></i>
               </div>
-              <h3>Character</h3>
-              <p>Embody integrity in every decision — on duty and off. Character is the compass that guides guardians through ambiguity.</p>
+              <h3>Composure</h3>
+              <p>Calm is a skill. Panic is contagious — and so is steadiness. I lead by the temperature I set in the room when everything else is on fire.</p>
               <div class="value-glow"></div>
             </div>
             <div class="value-card" data-index="1">
               <div class="value-icon-wrap">
                 <div class="value-hex"></div>
-                <i class="fas fa-fist-raised value-icon"></i>
+                <i class="fas fa-bullseye value-icon"></i>
               </div>
-              <h3>Courage</h3>
-              <p>Act with moral and physical bravery. Speak truth to power. Challenge the status quo when the mission demands it.</p>
+              <h3>Clarity</h3>
+              <p>Ambiguity costs missions. I communicate with precision — not to be direct for directness's sake, but because clear guidance is the most respectful thing I can give my team.</p>
               <div class="value-glow"></div>
             </div>
             <div class="value-card" data-index="2">
               <div class="value-icon-wrap">
                 <div class="value-hex"></div>
-                <i class="fas fa-link value-icon"></i>
+                <i class="fas fa-seedling value-icon"></i>
               </div>
-              <h3>Commitment</h3>
-              <p>Unwavering dedication to the mission, the force, and the nation. Commitment means finishing what you start — no matter the cost.</p>
+              <h3>Growth</h3>
+              <p>I invest in the "why." Skills fade. Understanding compounds. Every person on my team deserves a leader who is also their teacher.</p>
               <div class="value-glow"></div>
             </div>
             <div class="value-card" data-index="3">
               <div class="value-icon-wrap">
                 <div class="value-hex"></div>
-                <i class="fas fa-handshake-alt value-icon"></i>
+                <i class="fas fa-exchange-alt value-icon"></i>
               </div>
-              <h3>Community</h3>
-              <p>Build cohort. Foster belonging. The Guardian community is the force multiplier that makes individual excellence into collective invincibility.</p>
+              <h3>Translation</h3>
+              <p>Technical truth only matters if decision-makers understand it. I bridge the gap between what's happening in the network and what it means for the mission.</p>
+              <div class="value-glow"></div>
+            </div>
+            <div class="value-card" data-index="4">
+              <div class="value-icon-wrap">
+                <div class="value-hex"></div>
+                <i class="fas fa-shield-alt value-icon"></i>
+              </div>
+              <h3>Standards</h3>
+              <p>I hold the line on what matters — not because rules say so, but because I know what failure costs. Flexibility in execution. Firmness in outcome.</p>
+              <div class="value-glow"></div>
+            </div>
+            <div class="value-card" data-index="5">
+              <div class="value-icon-wrap">
+                <div class="value-hex"></div>
+                <i class="fas fa-unlock value-icon"></i>
+              </div>
+              <h3>Empowerment</h3>
+              <p>My job is to set intent and get out of the way. Micromanagement is a failure of trust. The best thing I can give my team is the belief that they can lead themselves.</p>
               <div class="value-glow"></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── CALL TO ACTION ── */}
-      <section id="begin" class="section cta-section">
+      {/* ══════════════════════════════════
+          FUTURE — The Final Statement
+          ══════════════════════════════════ */}
+      <section id="future" class="section cta-section">
         <div class="cta-bg">
           <div class="cta-stars"></div>
           <div class="cta-nebula"></div>
@@ -679,32 +729,39 @@ app.get('/', (c) => {
           <div class="cta-orb co-3" data-depth="0.08"></div>
         </div>
         <div class="cta-inner">
-          <div class="cta-badge fade-up">YOUR JOURNEY AWAITS</div>
+          <div class="cta-badge fade-up">SEMPER SUPRA · ALWAYS ABOVE</div>
           <h2 class="cta-title fade-up delay-1">
-            Ready to become<br/>
-            <span class="cta-gradient">the leader the stars need?</span>
+            The mission isn't<br/>
+            <span class="cta-gradient">finished. Neither am I.</span>
           </h2>
           <p class="cta-body fade-up delay-2">
-            The United States Space Force is building a generation of leaders capable of defending America's interests across the final frontier. Your journey from Guardian to All-Around Leader starts with a single decision.
+            Eight years built this. The next chapter will be defined by how many people I bring with me — not just as subordinates, but as leaders in their own right. The Space Force needs people who can hold technical standards and operational trust in the same hand. That's the work. That's the commitment.
           </p>
-          <div class="cta-buttons fade-up delay-3">
-            <a href="https://www.spaceforce.mil/" target="_blank" class="btn-primary large">
-              <i class="fas fa-rocket"></i> Explore Space Force
-            </a>
+
+          {/* Personal Motto */}
+          <div class="personal-motto fade-up delay-3">
+            <div class="motto-label">PERSONAL LEADERSHIP MOTTO</div>
+            <div class="motto-text">"Lead with intent. Hold the standard.<br/>Bring everyone with you."</div>
+            <div class="motto-attr">— TSgt Evelyn Davis, USSF</div>
+          </div>
+
+          <div class="cta-buttons fade-up delay-4">
             <a href="#hero" class="btn-ghost large">
-              <i class="fas fa-redo"></i> Restart Journey
+              <i class="fas fa-redo"></i> Start Over
+            </a>
+            <a href="#chapter-1" class="btn-primary large">
+              <i class="fas fa-book-open"></i> Read the Journey
             </a>
           </div>
+
           <div class="cta-seal fade-up delay-4">
-            <svg class="seal-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="seal-svg" viewBox="0 0 200 200" fill="none">
               <circle cx="100" cy="100" r="95" stroke="#00d4ff" stroke-width="1" opacity="0.3" fill="none"/>
               <circle cx="100" cy="100" r="75" stroke="#00d4ff" stroke-width="1.5" opacity="0.5" fill="none"/>
               <circle cx="100" cy="100" r="55" stroke="#00d4ff" stroke-width="1" opacity="0.3" fill="none"/>
               <circle cx="100" cy="100" r="8" fill="#00d4ff" opacity="0.8"/>
               <ellipse cx="100" cy="100" rx="75" ry="28" stroke="#00d4ff" stroke-width="1" opacity="0.4" fill="none" transform="rotate(-30 100 100)"/>
               <ellipse cx="100" cy="100" rx="75" ry="28" stroke="#00d4ff" stroke-width="1" opacity="0.4" fill="none" transform="rotate(30 100 100)"/>
-              <line x1="100" y1="5" x2="100" y2="195" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
-              <line x1="5" y1="100" x2="195" y2="100" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
             </svg>
           </div>
         </div>
@@ -721,43 +778,37 @@ app.get('/', (c) => {
               <circle cx="16" cy="16" r="2" fill="#00d4ff" opacity="0.8"/>
             </svg>
             <div>
-              <div class="footer-name">U.S. Space Force</div>
+              <div class="footer-name">TSgt Evelyn Davis · USSF</div>
               <div class="footer-tagline">Semper Supra — Always Above</div>
             </div>
           </div>
           <div class="footer-links">
-            <a href="#stage-1">Stage 1</a>
-            <a href="#stage-2">Stage 2</a>
-            <a href="#stage-3">Stage 3</a>
-            <a href="#stage-4">Stage 4</a>
-            <a href="#stage-5">Stage 5</a>
-            <a href="https://www.spaceforce.mil/" target="_blank">Official Site</a>
+            <a href="#chapter-1">Foundations</a>
+            <a href="#chapter-2">The Crucible</a>
+            <a href="#chapter-3">Who I Am Now</a>
+            <a href="#chapter-4">North Star</a>
+            <a href="#values">Values</a>
           </div>
           <div class="footer-copy">
-            &copy; {new Date().getFullYear()} United States Space Force Leadership Development Framework. Educational concept website.
+            &copy; {new Date().getFullYear()} TSgt Evelyn Davis · U.S. Space Force Leadership Development Portfolio
           </div>
         </div>
       </footer>
 
-      {/* ── PROGRESS BAR ── */}
+      {/* ── JOURNEY PROGRESS ── */}
       <div class="journey-progress" id="journeyProgress">
-        <div class="jp-track">
-          <div class="jp-fill" id="jpFill"></div>
-        </div>
+        <div class="jp-track"><div class="jp-fill" id="jpFill"></div></div>
         <div class="jp-nodes">
           <div class="jp-node jp-active" data-stage="0" title="Start"></div>
-          <div class="jp-node" data-stage="1" title="Junior Guardian"></div>
-          <div class="jp-node" data-stage="2" title="Mission Specialist"></div>
-          <div class="jp-node" data-stage="3" title="Team Commander"></div>
-          <div class="jp-node" data-stage="4" title="Strategic Visionary"></div>
-          <div class="jp-node" data-stage="5" title="All-Around Leader"></div>
+          <div class="jp-node" data-stage="1" title="Foundations"></div>
+          <div class="jp-node" data-stage="2" title="The Crucible"></div>
+          <div class="jp-node" data-stage="3" title="Who I Am Now"></div>
+          <div class="jp-node" data-stage="4" title="North Star"></div>
         </div>
       </div>
 
-      {/* ── CURSOR ── */}
       <div class="custom-cursor" id="customCursor"></div>
       <div class="cursor-trail" id="cursorTrail"></div>
-
       <script src="/static/app.js"></script>
     </div>
   )

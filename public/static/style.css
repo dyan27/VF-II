@@ -1569,3 +1569,427 @@ body {
   transition: all 0.2s ease;
 }
 .nav-mobile-menu a:hover { color: var(--sf-cyan); background: rgba(0, 212, 255, 0.06); }
+
+/* ══════════════════════════════════════════════
+   EVELYN DAVIS — PERSONAL JOURNEY ADDITIONS
+   ══════════════════════════════════════════════ */
+
+/* ── NAV logo text refinement ── */
+.nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+.nav-name { font-size: 13px; font-weight: 600; color: var(--text-primary); letter-spacing: 0.01em; line-height: 1.2; }
+.nav-sub  { font-size: 10px; font-weight: 400; color: var(--sf-cyan); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
+
+/* ── Hero eyebrow dots ── */
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; justify-content: center; }
+.eyebrow-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--sf-cyan); opacity: 0.7; }
+.hero-tagline {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 300;
+  color: var(--sf-cyan);
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* ── Base Timeline (Chapter 1 visual) ── */
+.base-timeline {
+  width: 100%;
+  max-width: 360px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--radius-md);
+}
+.base-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.base-nodes {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.base-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+.base-node span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--sf-cyan);
+  letter-spacing: 0.05em;
+}
+.base-node small {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+.base-node::before {
+  content: '';
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+  margin-bottom: 4px;
+}
+.base-node.active::before {
+  background: var(--sf-cyan);
+  border-color: var(--sf-cyan);
+  box-shadow: 0 0 8px rgba(0,212,255,0.6);
+}
+.base-connector {
+  flex-shrink: 0;
+  width: 20px; height: 1px;
+  background: rgba(0,212,255,0.25);
+  margin-bottom: 24px;
+}
+
+/* ── Story Callout (Chapter 2 highlight block) ── */
+.story-callout {
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  background: rgba(0,212,255,0.04);
+  border: 1px solid rgba(0,212,255,0.12);
+  border-radius: var(--radius-md);
+  margin-bottom: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.story-callout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.03), transparent);
+  pointer-events: none;
+}
+.callout-bar {
+  flex-shrink: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, var(--sf-cyan), rgba(0,212,255,0.2));
+}
+.callout-content { flex: 1; }
+.callout-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sf-cyan);
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+.callout-content p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ── Pillar highlight variant ── */
+.pillar-item.highlight {
+  border-color: rgba(0,212,255,0.1);
+  background: rgba(0,212,255,0.03);
+}
+.pillar-item.highlight:hover {
+  border-color: rgba(0,212,255,0.3);
+  background: rgba(0,212,255,0.07);
+}
+
+/* ── Tension Diagram (Chapter 2 visual) ── */
+.tension-diagram {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: 360px;
+  padding: 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--radius-md);
+}
+.tension-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.tension-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: var(--sf-cyan);
+}
+.tension-label { font-size: 11px; font-weight: 600; color: var(--text-primary); }
+.tension-sub   { font-size: 9px;  color: var(--text-muted); letter-spacing: 0.05em; }
+.tension-bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+.bridge-line {
+  width: 1px; height: 20px;
+  background: linear-gradient(to bottom, transparent, rgba(0,212,255,0.5), transparent);
+}
+.bridge-center {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(0,212,255,0.15);
+  border: 1.5px solid rgba(0,212,255,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--sf-cyan);
+  box-shadow: 0 0 16px rgba(0,212,255,0.2);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* ── Trait List (Chapter 3 leadership identity) ── */
+.trait-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 0;
+}
+.trait-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.3s ease;
+  position: relative;
+}
+.trait-item:last-child { border-bottom: none; }
+.trait-item::before {
+  content: '';
+  position: absolute;
+  left: -24px; top: 0; bottom: 0;
+  width: 2px;
+  background: transparent;
+  border-radius: 1px;
+  transition: background 0.3s ease;
+}
+.trait-item:hover::before { background: var(--sf-cyan); }
+.trait-item:hover { padding-left: 8px; }
+.trait-number {
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(0,212,255,0.3);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  width: 24px;
+  padding-top: 3px;
+  transition: color 0.3s ease;
+}
+.trait-item:hover .trait-number { color: var(--sf-cyan); }
+.trait-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+.trait-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* ── Leadership Radar ── */
+.leadership-radar {
+  width: 100%;
+  max-width: 360px;
+}
+.radar-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.radar-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+.radar-svg { width: 100%; height: 100%; }
+.radar-labels { position: absolute; inset: 0; pointer-events: none; }
+.rl {
+  position: absolute;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--sf-cyan);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.rl-top  { top: -2px;  left: 50%; transform: translateX(-50%); }
+.rl-tr   { top: 22%;   right: -4px; }
+.rl-br   { bottom: 22%; right: -4px; }
+.rl-bot  { bottom: -2px; left: 50%; transform: translateX(-50%); }
+.rl-bl   { bottom: 22%; left: -8px; }
+.rl-tl   { top: 22%;   left: -8px; }
+
+/* ── Quote attribution ── */
+.quote-attr {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--sf-cyan);
+  margin-top: 8px;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+/* ── Aspiration Cards (Chapter 4) ── */
+.aspiration-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.asp-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.asp-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  border-radius: 0 0 0 var(--radius-md);
+  transition: background 0.3s ease;
+}
+.asp-card:hover { background: rgba(0,212,255,0.04); border-color: rgba(0,212,255,0.15); }
+.asp-card:hover::before { background: linear-gradient(to bottom, var(--sf-cyan), rgba(0,212,255,0.2)); }
+.asp-icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  color: var(--sf-cyan);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+.asp-card:hover .asp-icon {
+  background: rgba(0,212,255,0.15);
+  border-color: rgba(0,212,255,0.4);
+  box-shadow: 0 0 12px rgba(0,212,255,0.2);
+}
+.asp-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+.asp-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* ── Values grid — 6 columns on wide, 3 on mid, 2 on small ── */
+.values-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+@media (max-width: 900px) {
+  .values-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 540px) {
+  .values-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── Personal Motto (CTA section) ── */
+.personal-motto {
+  margin: 0 auto 48px;
+  max-width: 620px;
+  padding: 32px 40px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.personal-motto::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
+}
+.personal-motto::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), transparent);
+}
+.motto-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sf-cyan);
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+.motto-text {
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.motto-attr {
+  font-size: 12px;
+  color: var(--sf-cyan);
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+/* ── Stage desc spacing ── */
+.stage-desc + .stage-desc { margin-top: 0; }
+
+/* ── Responsive tweaks for new components ── */
+@media (max-width: 768px) {
+  .tension-diagram { flex-direction: column; gap: 12px; }
+  .bridge-line { width: 20px; height: 1px; }
+  .tension-bridge { flex-direction: row; }
+  .aspiration-cards { gap: 12px; }
+  .trait-item { padding: 16px 0; }
+  .personal-motto { padding: 24px; }
+  .motto-text { font-size: 18px; }
+  .base-nodes { gap: 2px; }
+  .base-connector { width: 10px; }
+}
