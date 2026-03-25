@@ -365,8 +365,8 @@ app.get('/', (c) => {
                     <div class="game-title-row">
                       <div class="game-icon"><i class="fas fa-chess-king"></i></div>
                       <div>
-                        <div class="game-label">COMMANDER'S CALL</div>
-                        <div class="game-sub">A Leadership Decision Game</div>
+                        <div class="game-label">COMMANDER'S CALL 🚀</div>
+                        <div class="game-sub">Leadership Game — Things Get Weird</div>
                       </div>
                       <div class="game-score-wrap">
                         <div class="game-score-label">SCORE</div>
@@ -384,16 +384,17 @@ app.get('/', (c) => {
                     <div class="game-start-icon">
                       <i class="fas fa-satellite"></i>
                     </div>
-                    <h3 class="game-start-title">You're the new leader.</h3>
-                    <p class="game-start-desc">5 real-world scenarios. Every choice shapes your leadership profile. There are no perfect answers — only honest ones.</p>
+                    <h3 class="game-start-title">Congrats, You're In Charge. 😬</h3>
+                    <p class="game-start-desc">5 chaotic scenarios. Real leadership stakes. Questionable choices available. One mystery burrito. No pressure.</p>
                     <div class="game-traits-preview">
-                      <span><i class="fas fa-water"></i> Composure</span>
+                      <span><i class="fas fa-snowflake"></i> Ice Calm</span>
                       <span><i class="fas fa-bullseye"></i> Clarity</span>
                       <span><i class="fas fa-seedling"></i> Growth</span>
-                      <span><i class="fas fa-exchange-alt"></i> Trust</span>
+                      <span><i class="fas fa-language"></i> Translation</span>
+                      <span><i class="fas fa-unlock"></i> Trust</span>
                     </div>
                     <button class="game-btn-start" id="gameBtnStart">
-                      <i class="fas fa-play"></i> Begin Mission
+                      <i class="fas fa-rocket"></i> Accept the Chaos
                     </button>
                   </div>
 
@@ -408,7 +409,7 @@ app.get('/', (c) => {
                       <div class="feedback-text" id="feedbackText"></div>
                       <div class="feedback-trait" id="feedbackTrait"></div>
                       <button class="game-btn-next" id="gameBtnNext">
-                        Next Scenario <i class="fas fa-arrow-right"></i>
+                        Next Situation <i class="fas fa-arrow-right"></i>
                       </button>
                     </div>
                   </div>
@@ -425,7 +426,7 @@ app.get('/', (c) => {
                     <div class="game-result-desc" id="gameResultDesc"></div>
                     <div class="game-trait-summary" id="gameTraitSummary"></div>
                     <button class="game-btn-restart" id="gameBtnRestart">
-                      <i class="fas fa-redo"></i> Play Again
+                      <i class="fas fa-redo"></i> Try Not to Point at a Closet Again
                     </button>
                   </div>
                 </div>

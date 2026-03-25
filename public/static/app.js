@@ -345,108 +345,109 @@
   }
 
   /* ══════════════════════════════════════════════════════════
-     COMMANDER'S CALL — LEADERSHIP DECISION GAME
-     5 scenario-based rounds, trait scoring, animated results
+     COMMANDER'S CALL — LEADERSHIP DECISION GAME (FUNNY ED.)
+     5 chaotic scenarios, roast-mode feedback, spicy results
      ══════════════════════════════════════════════════════════ */
   (function initLeadershipGame() {
 
     // ── Scenario data ──────────────────────────────────────────
     const SCENARIOS = [
       {
-        tag: 'SCENARIO 1 · FIRST WEEK',
-        title: 'Day One Authority',
-        text: 'You just took over as the new team lead. Your most experienced operator, SrA Torres, immediately challenges one of your decisions in front of the whole team — loudly. Everyone goes quiet and looks at you.',
+        tag: '🚀 SCENARIO 1 · DAY ONE CHAOS',
+        title: 'Oh No. They\'re Looking at You.',
+        text: 'It\'s your FIRST DAY as team lead. You walk in with your coffee, ready to project maximum confidence. SrA Torres immediately challenges your decision in front of everyone — loudly, dramatically, with hand gestures. The whole room goes dead silent. A tumbleweed rolls by. Somewhere, a phone rings and nobody answers it. Everyone is staring at you.',
         choices: [
-          { letter: 'A', text: 'Shut it down immediately. Pull rank and tell Torres to follow orders or face consequences.', score: 0, tier: 'miss' },
-          { letter: 'B', text: 'Acknowledge the challenge calmly in front of the team: "Good point, Torres. Let\'s discuss this after the brief — I want to hear your perspective."', score: 20, tier: 'correct' },
-          { letter: 'C', text: 'Ignore the comment and keep talking. Don\'t give it air time.', score: 5, tier: 'partial' },
-          { letter: 'D', text: 'Agree with Torres publicly and change your decision on the spot.', score: 5, tier: 'partial' }
+          { letter: 'A', text: '😤 Slam your coffee down. "Torres. My office. NOW." You point aggressively at a door. (It\'s a supply closet.)', score: 0, tier: 'miss' },
+          { letter: 'B', text: '😎 Stay totally calm: "Good point, Torres. Let\'s talk after the brief — I genuinely want to hear it." You then take a long sip of coffee.', score: 20, tier: 'correct' },
+          { letter: 'C', text: '🙈 Pretend you didn\'t hear it. Start talking louder. Aggressively point at a slide.', score: 5, tier: 'partial' },
+          { letter: 'D', text: '🏳️ "You know what Torres, you\'re totally right, let\'s do it your way." Immediately hand over the briefing clicker.', score: 3, tier: 'partial' }
         ],
         feedbacks: {
-          correct: { icon: '🎯', result: 'Strong Call', text: 'Composure in front of the team. You acknowledged the challenge without backing down or escalating. That earns respect — not fear.', trait: '+ COMPOSURE EARNED' },
-          partial: { icon: '⚠️', result: 'Mixed Signal', text: 'Avoidance or immediate capitulation sends a confusing signal to the team. Leaders who don\'t respond get tested harder next time.', trait: '~ COMPOSURE DEVELOPING' },
-          miss:    { icon: '❌', result: 'Authority Trap', text: 'Rank gives you authority. It doesn\'t earn you trust. Shutting it down with power creates compliance — not loyalty.', trait: '– COMPOSURE MISSED' }
+          correct: { icon: '😏', result: 'Smooth Operator', text: 'Calm under fire. You acknowledged Torres without folding or going full drill sergeant. The team saw a leader. Torres is now lowkey impressed.', trait: '+ COMPOSURE UNLOCKED 🧊' },
+          partial: { icon: '😬', result: 'Yikes, But Okay', text: 'Louder slides won\'t fix a room full of raised eyebrows. And Torres is definitely going to try again tomorrow. Good luck.', trait: '~ COMPOSURE: WARMING UP' },
+          miss:    { icon: '💀', result: 'Supply Closet Incident', text: 'You pointed dramatically at a supply closet and it will be your entire personality for the next six months. "My office, NOW" said the person whose office was a broom.', trait: '– COMPOSURE: MIA 🧹' }
         }
       },
       {
-        tag: 'SCENARIO 2 · UNDER PRESSURE',
-        title: 'The System Is Down',
-        text: 'It\'s 0200. A critical mission system just went offline. Your team is panicking, leadership is calling, and you don\'t have a fix yet. What do you do first?',
+        tag: '💻 SCENARIO 2 · IT\'S 0200',
+        title: 'Everything Is On Fire (Figuratively)',
+        text: 'It\'s 2am. The mission system just crashed. Your team is doing that thing where they all stare at screens really hard as if that fixes things. Your commander is blowing up your phone. You have no fix yet, questionable coffee, and someone left a half-eaten burrito on the server rack. What do you do?',
         choices: [
-          { letter: 'A', text: 'Tell leadership everything you know — including that you don\'t have an answer yet — then assign clear roles to your team.', score: 20, tier: 'correct' },
-          { letter: 'B', text: 'Work the problem in silence. Don\'t update anyone until you have a solution.', score: 0, tier: 'miss' },
-          { letter: 'C', text: 'Delegate everything to your best tech and wait for them to fix it.', score: 5, tier: 'partial' },
-          { letter: 'D', text: 'Call for help from another flight before assessing what you already have.', score: 8, tier: 'partial' }
+          { letter: 'A', text: '📣 Honest update to leadership: "We\'re on it, no fix yet, here\'s what we know." Then assign clear roles to the team. Eat nobody\'s burrito.', score: 20, tier: 'correct' },
+          { letter: 'B', text: '🔕 Go completely dark. Silence the phone. You will emerge victorious or not at all. This is your destiny now.', score: 0, tier: 'miss' },
+          { letter: 'C', text: '🛌 Delegate everything to your best tech, then sit in the corner pretending to "monitor the situation."', score: 5, tier: 'partial' },
+          { letter: 'D', text: '🍔 Pick up the mystery burrito. Eat it. Maybe the calories will inspire a solution.', score: 0, tier: 'miss' }
         ],
         feedbacks: {
-          correct: { icon: '🎯', result: 'Calm Command', text: 'Honest updates and clear role assignment during a crisis is textbook calm-under-pressure leadership. You organized the chaos.', trait: '+ CLARITY EARNED' },
-          partial: { icon: '⚠️', result: 'Partial Response', text: 'Delegation and outside help have their place — but leaders who disappear during a crisis lose the team\'s trust fast.', trait: '~ CLARITY DEVELOPING' },
-          miss:    { icon: '❌', result: 'Silence Is Costly', text: 'Going dark during an incident lets panic fill the vacuum. Leadership is most visible in what you do when nothing is certain.', trait: '– CLARITY MISSED' }
+          correct: { icon: '🎯', result: 'Crisis Commander', text: 'Honest comms + clear roles = you organized the chaos. The team actually knew what to do. Leadership respected the update. The burrito remained untouched (wise).', trait: '+ CLARITY EARNED 🔦' },
+          partial: { icon: '😅', result: '"Monitoring" Intensifies', text: 'Your best tech fixed it. They deserve your job. You sat in a corner looking pensive. Technically leadership but spiritually a speed bump.', trait: '~ CLARITY: FLICKERING' },
+          miss:    { icon: '🔥', result: 'Chaos Enthusiast', text: 'Option B: You went dark for 45 minutes and everyone assumed you\'d quit. Option D: The burrito gave you food poisoning. Both choices: legendary, not recommended.', trait: '– CLARITY: OFFLINE 📵' }
         }
       },
       {
-        tag: 'SCENARIO 3 · DEVELOPING PEOPLE',
-        title: 'The Junior Airman',
-        text: 'A1C Rivera keeps making the same mistake on reports — for the third time this week. You\'ve already corrected it twice. Your supervisor is asking about Rivera\'s progress.',
+        tag: '📋 SCENARIO 3 · THE REPORT THAT HAUNTS YOU',
+        title: 'Third Time\'s the Alarm',
+        text: 'A1C Rivera has made the SAME mistake on their report three times this week. You\'ve corrected it twice. The form is not complicated. It has four fields. Rivera somehow manages to get all four wrong in different combinations each time, like a leadership puzzle generated specifically to test you. Your supervisor is asking "how\'s Rivera doing?" with the energy of someone who already knows.',
         choices: [
-          { letter: 'A', text: 'Write Rivera up. Three strikes — it\'s a discipline issue now.', score: 0, tier: 'miss' },
-          { letter: 'B', text: 'Sit down with Rivera, ask what\'s going on, explain the "why" behind the correct process, and create a simple check before submission.', score: 20, tier: 'correct' },
-          { letter: 'C', text: 'Start fixing Rivera\'s reports yourself to keep the supervisor happy.', score: 2, tier: 'miss' },
-          { letter: 'D', text: 'Assign a peer to review Rivera\'s work before it comes to you.', score: 10, tier: 'partial' }
+          { letter: 'A', text: '⚖️ Write them up immediately. Three strikes, full disciplinary action. Drop the paperwork dramatically.', score: 0, tier: 'miss' },
+          { letter: 'B', text: '🧑‍🏫 Sit down with Rivera, ask what\'s actually going on, explain the WHY behind each field, and build a simple checklist together.', score: 20, tier: 'correct' },
+          { letter: 'C', text: '🤫 Quietly fix all of Rivera\'s reports yourself forever. You will carry this burden in silence. You are a martyr.', score: 0, tier: 'miss' },
+          { letter: 'D', text: '👥 Assign a peer to review Rivera\'s work before it reaches you. Buy yourself some peace.', score: 10, tier: 'partial' }
         ],
         feedbacks: {
-          correct: { icon: '🎯', result: 'People Developer', text: 'You taught the why, not just the what — and created a system. That\'s the difference between managing a task and developing a person.', trait: '+ GROWTH EARNED' },
-          partial: { icon: '⚠️', result: 'Decent Workaround', text: 'Peer review helps — but it doesn\'t build Rivera\'s capability. You\'ve created a check, not a leader.', trait: '~ GROWTH DEVELOPING' },
-          miss:    { icon: '❌', result: 'Missed the Root', text: 'Discipline without understanding, or absorbing someone\'s mistakes yourself — both skip the real question: does Rivera know WHY?', trait: '– GROWTH MISSED' }
+          correct: { icon: '🌱', result: 'Developer of Humans', text: 'You taught the WHY. Rivera now understands the form and probably feels seen. The checklist is a small act of genius. This is what growing people looks like.', trait: '+ GROWTH EARNED 🌱' },
+          partial: { icon: '🔄', result: 'Elegant Workaround', text: 'The peer review buys time but doesn\'t fix Rivera. You\'ve added a layer of bureaucracy where a conversation was needed. Good band-aid though.', trait: '~ GROWTH: POSSIBLE' },
+          miss:    { icon: '😭', result: 'Both Bad', text: 'Option A: Rivera gets written up for a FORM. That\'s going to come up in therapy someday. Option C: You are now Rivera\'s unpaid report secretary until retirement. Congratulations?', trait: '– GROWTH: STUNTED 🪨' }
         }
       },
       {
-        tag: 'SCENARIO 4 · STANDARDS VS. TEMPO',
-        title: 'The Pushback',
-        text: 'You need to implement a new cybersecurity control — patching a critical system. The mission owner says the timing is impossible and pushes back hard. Leadership is watching.',
+        tag: '🛡️ SCENARIO 4 · THE IMMOVABLE COLONEL',
+        title: 'Cyber vs. Vibes',
+        text: 'You need to patch a critical system. The mission owner — let\'s call him Col. "We\'ve Always Done It This Way" — tells you the timing is "operationally impossible" and waves his hand dismissively like he\'s shooing a fly. He has strong opinions and weak cyber knowledge. Leadership is watching. You are holding a risk report that would give IT people nightmares.',
         choices: [
-          { letter: 'A', text: 'Back off. Mission tempo wins. You\'ll revisit next month.', score: 0, tier: 'miss' },
-          { letter: 'B', text: 'Force the patch immediately. The standard is the standard.', score: 5, tier: 'partial' },
-          { letter: 'C', text: 'Translate the cyber risk into mission terms, propose a risk-based timeline, and negotiate a window that protects both the standard and the operation.', score: 20, tier: 'correct' },
-          { letter: 'D', text: 'Escalate to your commander and let leadership decide.', score: 8, tier: 'partial' }
+          { letter: 'A', text: '🏃 Back off. Mission tempo wins. You\'ll revisit next month. Or maybe the month after. Or when something breaks.', score: 0, tier: 'miss' },
+          { letter: 'B', text: '🚨 Force the patch NOW. Rules are rules. You send the patch email with a high-priority flag and three exclamation points.', score: 5, tier: 'partial' },
+          { letter: 'C', text: '🤝 Translate the cyber risk into mission impact, propose a risk-tiered timeline, and negotiate a window that protects both. No exclamation points.', score: 20, tier: 'correct' },
+          { letter: 'D', text: '📤 Forward the whole situation to your commander with a subject line of "your problem now :)"', score: 8, tier: 'partial' }
         ],
         feedbacks: {
-          correct: { icon: '🎯', result: 'Bridge Builder', text: 'You held the standard without breaking the relationship. Translating risk into mission language — that\'s how trust is built across the technical-operational gap.', trait: '+ TRANSLATION EARNED' },
-          partial: { icon: '⚠️', result: 'One-Dimensional', text: 'Rigid enforcement or full deferral both miss the point. A good leader negotiates outcomes, not rules.', trait: '~ TRANSLATION DEVELOPING' },
-          miss:    { icon: '❌', result: 'Standard Abandoned', text: 'Backing off sets a precedent: the standard is optional when people push back. That\'s how mission risk quietly compounds.', trait: '– TRANSLATION MISSED' }
+          correct: { icon: '🌉', result: 'Bridge Builder Supreme', text: 'You spoke mission, not tech. The Colonel understood the risk without needing a CompTIA cert. You got the window. The patch happened. Nobody got hacked. Legendary.', trait: '+ TRANSLATION MASTERED 🌉' },
+          partial: { icon: '😤', result: 'Technically Correct', text: 'Option B: Three exclamation points. Three. You\'re that person now. Option D: Your commander got the email and is now questioning your growth potential. Both moves: bold, not great.', trait: '~ TRANSLATION: ROUGH' },
+          miss:    { icon: '🕳️', result: 'See You Next Breach', text: 'You backed off and now the unpatched system is just vibing out there like a welcome mat for adversaries. "We\'ll revisit" is just procrastination with a military accent.', trait: '– TRANSLATION: LOST IN JARGON 📡' }
         }
       },
       {
-        tag: 'SCENARIO 5 · INTENT VS. CONTROL',
-        title: 'Let Them Lead',
-        text: 'Your team has a complex task due at 1600. You know exactly how you\'d do it. SSgt Chen has a different approach — it\'s unorthodox but not wrong. Do you intervene?',
+        tag: '🎮 SCENARIO 5 · LET GO OR HOVER?',
+        title: 'Trust Fall (Leadership Edition)',
+        text: 'Big task. Due at 1600. SSgt Chen has a plan — it\'s unorthodox, a little chaotic, but not wrong. Your brain is screaming "DO IT MY WAY" because you know exactly how you\'d do it and your way is obviously better (you think). Chen is looking at you waiting for a response. The team is watching. A clock ticks ominously somewhere.',
         choices: [
-          { letter: 'A', text: 'Step in and redirect Chen to your method. You\'re responsible for the outcome.', score: 0, tier: 'miss' },
-          { letter: 'B', text: 'Let Chen run it. Set a clear check-in at 1400 and stay available — but don\'t hover.', score: 20, tier: 'correct' },
-          { letter: 'C', text: 'Give Chen the task but quietly assign someone to shadow and correct if needed.', score: 5, tier: 'partial' },
-          { letter: 'D', text: 'Ask Chen to walk you through the plan first, then approve it formally before proceeding.', score: 12, tier: 'partial' }
+          { letter: 'A', text: '🕹️ Override Chen immediately. "Here\'s how WE\'re doing this." You then explain your method for 12 uninterrupted minutes.', score: 0, tier: 'miss' },
+          { letter: 'B', text: '✌️ "Run it, Chen. Check in with me at 1400, I\'m here if you need me." You then visibly resist the urge to hover.', score: 20, tier: 'correct' },
+          { letter: 'C', text: '🕵️ Approve it but secretly assign A1C Rivera to shadow Chen and report back. You\'re basically a spy now.', score: 5, tier: 'partial' },
+          { letter: 'D', text: '📝 Ask Chen to write a formal 3-page plan, get it approved, then brief it to the flight, then do a dry run. Just to be safe.', score: 3, tier: 'partial' }
         ],
         feedbacks: {
-          correct: { icon: '🎯', result: 'Empowering Leader', text: 'You set intent, created a check-in, and trusted your team. That\'s how leaders grow other leaders — and how you earn a team that doesn\'t need you to function.', trait: '+ EMPOWERMENT EARNED' },
-          partial: { icon: '⚠️', result: 'Cautious Trust', text: 'Formal approval and shadow oversight signal distrust. You\'re still controlling the outcome — just at arm\'s length.', trait: '~ EMPOWERMENT DEVELOPING' },
-          miss:    { icon: '❌', result: 'Control Override', text: 'Redirecting to your method shuts down ownership and stifles growth. The best leaders step back — especially when they\'re right.', trait: '– EMPOWERMENT MISSED' }
+          correct: { icon: '🦅', result: 'Eagles Don\'t Micromanage', text: 'You set intent, created a check-in, and got out of the way. Chen crushed it. The team knows you trust them. You grew a leader today. Also you didn\'t say "but here\'s what I would do" even ONCE. Incredible.', trait: '+ EMPOWERMENT MAXED 🔓' },
+          partial: { icon: '😂', result: 'Trust Issues (Relatable)', text: 'Option C: You made Rivera a spy. Rivera told Chen immediately. Option D: By the time the dry run is done, it\'s 1600 and nothing got done. You micromanaged the planning of the planning.', trait: '~ EMPOWERMENT: IN PROGRESS' },
+          miss:    { icon: '🎙️', result: 'The 12-Minute Monologue', text: 'You explained your method for 12 minutes. Nobody clapped. Chen nodded politely but made eye contact with the exit. The team now does whatever you say and nothing more. Congratulations on your very efficient robot army.', trait: '– EMPOWERMENT: BLOCKED 🧱' }
         }
       }
     ];
 
     const TRAITS = [
-      { key: 'composure',    icon: 'fas fa-water',        label: 'Composure' },
+      { key: 'composure',    icon: 'fas fa-snowflake',    label: 'Composure' },
       { key: 'clarity',      icon: 'fas fa-bullseye',     label: 'Clarity' },
       { key: 'growth',       icon: 'fas fa-seedling',     label: 'Growth' },
-      { key: 'translation',  icon: 'fas fa-exchange-alt', label: 'Translation' },
+      { key: 'translation',  icon: 'fas fa-language',     label: 'Translation' },
       { key: 'empowerment',  icon: 'fas fa-unlock',       label: 'Empowerment' }
     ];
 
     const RESULT_TIERS = [
-      { min: 90, title: '⭐ Outstanding Commander', desc: 'You led with composure, clarity, and trust. These aren\'t just right answers — they\'re the habits of a leader who\'s done the hard work.' },
-      { min: 70, title: '🎖 Solid Leader', desc: 'Strong instincts, a few rough edges. You default to the right values under pressure — now build the consistency.' },
-      { min: 45, title: '📋 Learning Leader', desc: 'You\'re developing. Some calls landed, others didn\'t — but awareness is step one. Great leaders are built, not born.' },
-      { min: 0,  title: '🔁 Starting Point', desc: 'Every great leader has made these mistakes. The fact you\'re in this game means you\'re asking the right questions.' }
+      { min: 90, title: '🏆 Certified Space Force Legend', desc: 'Perfect score? You didn\'t just pass — you flourished. The supply closet is NOT your office, the burrito stayed on the rack, Rivera has a checklist, and Chen crushed the task. Somebody give this person a satellite.' },
+      { min: 70, title: '🎖️ Pretty Solid, Actually', desc: 'Strong instincts, occasional chaos. You know what leadership looks like — you just need to stop fighting the urge to hover, explain for 12 minutes, or forward emails with ":)" in the subject line.' },
+      { min: 45, title: '📋 Work In Progress (We All Are)', desc: 'Some great calls, some questionable ones. The fact that you didn\'t eat the mystery burrito suggests you have potential. Keep going. Leadership is a practice, not a personality trait.' },
+      { min: 20, title: '😬 Bless Your Heart, Guardian', desc: 'You may have pointed at a supply closet, gone completely dark at 0200, and written Rivera up for a 4-field form. The good news: you survived. The better news: awareness is the first step.' },
+      { min: 0,  title: '🧹 The Supply Closet Awaits', desc: 'Every single choice was a learning opportunity. All five of them. That\'s actually impressive in a "we need to talk" kind of way. The good news: you\'re already asking the right questions by playing this game.' }
     ];
 
     // ── State ──────────────────────────────────────────────────
@@ -558,7 +559,7 @@
     function showResults() {
       // Compute percentage (max 100 pts across 5 rounds)
       const pct = Math.round((totalScore / 100) * 100);
-      const tier = RESULT_TIERS.find(t => pct >= t.min);
+      const tier = RESULT_TIERS.find(t => pct >= t.min) || RESULT_TIERS[RESULT_TIERS.length - 1];
 
       resultScore.textContent = pct;
       resultTitle.textContent = tier.title;
