@@ -121,14 +121,29 @@
     }
   });
 
-  /* ─── HERO PLANET MOUSE TILT ─── */
+  /* ─── HERO PLANET SMOOTH TILT + FLOAT ─── */
   const heroPlanet = document.getElementById('heroPlanet');
   if (heroPlanet) {
+    let targetRX = 0, targetRY = 0;
+    let currentRX = 0, currentRY = 0;
+    let floatOffset = 0;
+
     document.addEventListener('mousemove', e => {
-      const nx = (e.clientX / window.innerWidth  - 0.5) * 12;
-      const ny = (e.clientY / window.innerHeight - 0.5) * 8;
-      heroPlanet.style.transform = `translateY(-50%) rotateX(${-ny}deg) rotateY(${nx}deg)`;
+      targetRY =  (e.clientX / window.innerWidth  - 0.5) * 12;
+      targetRX = -(e.clientY / window.innerHeight - 0.5) * 8;
     });
+
+    function animatePlanet(ts) {
+      // Smooth lerp toward mouse target
+      currentRX += (targetRX - currentRX) * 0.06;
+      currentRY += (targetRY - currentRY) * 0.06;
+      // Gentle CSS-free float bob
+      floatOffset = Math.sin(ts / 2200) * 12;
+      heroPlanet.style.transform =
+        `translateY(${floatOffset}px) rotateX(${currentRX}deg) rotateY(${currentRY}deg)`;
+      requestAnimationFrame(animatePlanet);
+    }
+    requestAnimationFrame(animatePlanet);
   }
 
   /* ─── NAVBAR SCROLL ─── */
