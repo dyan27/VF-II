@@ -30,7 +30,7 @@ app.get('/', (c) => {
           <ul class="nav-links">
             <li><a href="#hero">Home</a></li>
             <li><a href="#chapter-1">Foundations</a></li>
-            <li><a href="#chapter-2">The Crucible</a></li>
+            <li><a href="#chapter-2">Early Leadership</a></li>
             <li><a href="#chapter-3">Now</a></li>
             <li><a href="#chapter-4">North Star</a></li>
             <li><a href="#values">Values</a></li>
@@ -148,7 +148,7 @@ app.get('/', (c) => {
                 <div class="node-dot"></div>
                 <div class="node-label">
                   <span class="node-num">02</span>
-                  <span class="node-name">The Crucible</span>
+                  <span class="node-name">Early Leadership</span>
                 </div>
               </a>
               <a href="#chapter-3" class="timeline-node" data-stage="3">
@@ -276,10 +276,10 @@ app.get('/', (c) => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════
-          CHAPTER 2 — THE CRUCIBLE
-          The Cyber vs. Ops Defining Moment
-          ══════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════════
+          CHAPTER 2 — EARLY-STAGE LEADERSHIP
+          First steps into leading people
+          ══════════════════════════════════════════════ */}
       <section id="chapter-2" class="section stage-section stage-2-section" data-stage="2">
         <div class="stage-bg">
           <div class="stage-particles" id="particles2"></div>
@@ -292,107 +292,115 @@ app.get('/', (c) => {
         <div class="stage-inner">
           <div class="stage-badge fade-up">
             <span class="stage-num">02</span>
-            <span class="stage-tag">CHAPTER TWO · THE CRUCIBLE</span>
+            <span class="stage-tag">CHAPTER TWO · EARLY-STAGE LEADERSHIP</span>
           </div>
-          <div class="stage-content-grid reverse">
-            <div class="stage-text">
-              <h2 class="stage-title fade-up delay-1">The Day Cyber<br/><span class="accent-text">Met Reality.</span></h2>
 
-              {/* Story callout */}
-              <div class="story-callout fade-up delay-2">
+          {/* ── Full-width intro ── */}
+          <div class="ch2-intro">
+            <h2 class="stage-title fade-up delay-1">Learning to<br/><span class="accent-text">Lead People.</span></h2>
+            <p class="stage-desc ch2-lead fade-up delay-2">
+              Technical skill got me in the room. Leadership is what made me matter inside it.
+              The shift from expert contributor to early-stage leader was the hardest — and most
+              important — transition of my career. Nobody hands you a playbook. You earn it,
+              one uncomfortable moment at a time.
+            </p>
+          </div>
+
+          {/* ── Two-col: lessons + video ── */}
+          <div class="stage-content-grid ch2-grid fade-up delay-3">
+            <div class="stage-text">
+
+              <div class="story-callout">
                 <div class="callout-bar"></div>
                 <div class="callout-content">
-                  <div class="callout-label">THE DEFINING MOMENT</div>
-                  <p>I was enforcing cybersecurity controls — patching schedules, access restrictions, system hardening — all technically correct. All mission-critical. And all met with resistance from operators who saw cyber as the enemy of readiness, not the enabler of it.</p>
+                  <div class="callout-label">THE FIRST LESSON</div>
+                  <p>Leadership isn't a promotion — it's a decision you make every single day to put your people's growth before your own comfort.</p>
                 </div>
               </div>
 
-              <p class="stage-desc fade-up delay-3" style="margin-top:24px">
-                The mission owners weren't wrong to push back. Their timelines were real. Their pressures were real. What they lacked wasn't willingness — it was translation. Nobody had ever framed cyber risk in terms they used every day: mission degradation, sortie generation, system availability rates.
-              </p>
-              <p class="stage-desc fade-up delay-3" style="margin-top:-16px">
-                So I changed the conversation. Instead of "you must patch by Friday," it became "here's what exposure looks like in operational terms — and here's a risk-prioritized timeline that protects both the mission and the network." I stopped being the compliance officer and became a mission partner.
-              </p>
-
-              <div class="stage-pillars fade-up delay-3">
-                <div class="pillar-item highlight">
-                  <div class="pillar-icon"><i class="fas fa-language"></i></div>
-                  <div class="pillar-text">
-                    <strong>Translated Risk into Mission Terms</strong>
-                    <p>Reframed technical vulnerabilities as operational consequences — language mission owners actually used and acted on.</p>
+              <div class="early-lessons">
+                <div class="lesson-item">
+                  <div class="lesson-icon"><i class="fas fa-ear-listen"></i></div>
+                  <div class="lesson-body">
+                    <div class="lesson-title">Listen Before You Lead</div>
+                    <div class="lesson-desc">My first instinct was to have answers. The better move was to ask questions. Early leaders who listen first build teams that trust them faster and perform longer.</div>
                   </div>
                 </div>
-                <div class="pillar-item highlight">
-                  <div class="pillar-icon"><i class="fas fa-balance-scale"></i></div>
-                  <div class="pillar-text">
-                    <strong>Risk-Based Prioritization</strong>
-                    <p>Replaced rigid compliance timelines with intelligent triage — highest risk first, mission tempo protected.</p>
+                <div class="lesson-item">
+                  <div class="lesson-icon"><i class="fas fa-person-walking"></i></div>
+                  <div class="lesson-body">
+                    <div class="lesson-title">Show Up Consistently</div>
+                    <div class="lesson-desc">Credibility as a new leader isn't built in big moments — it's built in the small ones. Being present, being reliable, being the same person every day.</div>
                   </div>
                 </div>
-                <div class="pillar-item highlight">
-                  <div class="pillar-icon"><i class="fas fa-handshake"></i></div>
-                  <div class="pillar-text">
-                    <strong>Influence Without Authority</strong>
-                    <p>Had no command over mission owners. Built trust through credibility, clarity, and demonstrating shared stakes.</p>
+                <div class="lesson-item">
+                  <div class="lesson-icon"><i class="fas fa-circle-nodes"></i></div>
+                  <div class="lesson-body">
+                    <div class="lesson-title">Your Title Means Nothing — Yet</div>
+                    <div class="lesson-desc">Early on I learned that rank gives you authority but not influence. Influence is earned through how you treat people when no one is watching.</div>
                   </div>
                 </div>
-                <div class="pillar-item highlight">
-                  <div class="pillar-icon"><i class="fas fa-bridge"></i></div>
-                  <div class="pillar-text">
-                    <strong>Became the Bridge</strong>
-                    <p>Technical teams spoke one language. Mission leaders spoke another. I learned to live in both.</p>
+                <div class="lesson-item">
+                  <div class="lesson-icon"><i class="fas fa-magnifying-glass"></i></div>
+                  <div class="lesson-body">
+                    <div class="lesson-title">Embrace the Discomfort</div>
+                    <div class="lesson-desc">Every conversation that made me nervous, every decision I wasn't sure of — those were the moments that built me. Growth lives exactly at the edge of uncertainty.</div>
                   </div>
                 </div>
               </div>
 
-              <div class="stage-milestone fade-up delay-4">
+              <div class="stage-milestone">
                 <div class="milestone-label">What This Chapter Built</div>
-                <div class="milestone-text">The leadership lesson no classroom teaches: authority earns nothing. Credibility earns everything. This was where I stopped being a technician and started becoming a leader.</div>
+                <div class="milestone-text">The foundation of self-awareness every leader needs — knowing that you don't know everything, and that the willingness to learn is itself a leadership trait.</div>
               </div>
             </div>
+
+            {/* ── RIGHT: Video + card ── */}
             <div class="stage-visual">
-              <div class="stage-viz-wrap fade-up delay-2">
+              <div class="stage-viz-wrap">
+
+                {/* Video embed */}
+                <div class="video-block">
+                  <div class="video-label">
+                    <i class="fas fa-play-circle"></i>
+                    <span>WATCH · THE MINDSET OF A LEADER</span>
+                  </div>
+                  <div class="video-frame-wrap">
+                    <iframe
+                      class="video-frame"
+                      src="https://www.youtube.com/embed/MOhXd_BlSJU?rel=0&modestbranding=1&color=white"
+                      title="2 Minutes with TK: The Mindset of a Leader"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                  <div class="video-caption">
+                    <strong>The Mindset of a Leader</strong> · Under 2 minutes
+                    <p>"Today, I get to lead with purpose, serve people, solve problems, and bring energy."</p>
+                  </div>
+                </div>
+
                 <div class="viz-card s2-card">
                   <div class="viz-icon-ring">
                     <div class="icon-ring r1"></div>
                     <div class="icon-ring r2"></div>
                     <div class="icon-ring r3"></div>
-                    <div class="central-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="central-icon"><i class="fas fa-seedling"></i></div>
                   </div>
-                  <div class="viz-label">The Bridge Builder</div>
-                  <div class="viz-rank">Influence · Translation · Trust</div>
+                  <div class="viz-label">Early-Stage Leader</div>
+                  <div class="viz-rank">Building the Foundation</div>
                   <div class="viz-traits">
-                    <span>Persuasive</span>
-                    <span>Risk-Fluent</span>
-                    <span>Credible</span>
-                    <span>Principled</span>
-                  </div>
-                </div>
-
-                {/* Tension diagram */}
-                <div class="tension-diagram">
-                  <div class="tension-side ts-left">
-                    <div class="tension-icon"><i class="fas fa-lock"></i></div>
-                    <div class="tension-label">Cyber Standards</div>
-                    <div class="tension-sub">Compliance · Hardening · Risk</div>
-                  </div>
-                  <div class="tension-bridge">
-                    <div class="bridge-line bl-1"></div>
-                    <div class="bridge-center">
-                      <i class="fas fa-user-shield"></i>
-                    </div>
-                    <div class="bridge-line bl-2"></div>
-                  </div>
-                  <div class="tension-side ts-right">
-                    <div class="tension-icon"><i class="fas fa-fighter-jet"></i></div>
-                    <div class="tension-label">Operational Tempo</div>
-                    <div class="tension-sub">Readiness · Speed · Mission</div>
+                    <span>Curious</span>
+                    <span>Humble</span>
+                    <span>Consistent</span>
+                    <span>Intentional</span>
                   </div>
                 </div>
 
                 <div class="viz-quote">
                   <i class="fas fa-quote-left"></i>
-                  <p>"The resistance wasn't obstruction — it was a gap I hadn't filled yet. Once I filled it, the resistance became partnership."</p>
+                  <p>"Leadership isn't something that happens to you when you get promoted. It's something you practice long before anyone calls you a leader."</p>
+                  <div class="quote-attr">— TSgt Evelyn Davis</div>
                 </div>
               </div>
             </div>
@@ -784,7 +792,7 @@ app.get('/', (c) => {
           </div>
           <div class="footer-links">
             <a href="#chapter-1">Foundations</a>
-            <a href="#chapter-2">The Crucible</a>
+            <a href="#chapter-2">Early Leadership</a>
             <a href="#chapter-3">Who I Am Now</a>
             <a href="#chapter-4">North Star</a>
             <a href="#values">Values</a>
@@ -801,7 +809,7 @@ app.get('/', (c) => {
         <div class="jp-nodes">
           <div class="jp-node jp-active" data-stage="0" title="Start"></div>
           <div class="jp-node" data-stage="1" title="Foundations"></div>
-          <div class="jp-node" data-stage="2" title="The Crucible"></div>
+          <div class="jp-node" data-stage="2" title="Early Leadership"></div>
           <div class="jp-node" data-stage="3" title="Who I Am Now"></div>
           <div class="jp-node" data-stage="4" title="North Star"></div>
         </div>
