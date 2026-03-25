@@ -344,6 +344,276 @@
     arms[2].style.setProperty('--start-angle', '240deg');
   }
 
+  /* ══════════════════════════════════════════════════════════
+     COMMANDER'S CALL — LEADERSHIP DECISION GAME
+     5 scenario-based rounds, trait scoring, animated results
+     ══════════════════════════════════════════════════════════ */
+  (function initLeadershipGame() {
+
+    // ── Scenario data ──────────────────────────────────────────
+    const SCENARIOS = [
+      {
+        tag: 'SCENARIO 1 · FIRST WEEK',
+        title: 'Day One Authority',
+        text: 'You just took over as the new team lead. Your most experienced operator, SrA Torres, immediately challenges one of your decisions in front of the whole team — loudly. Everyone goes quiet and looks at you.',
+        choices: [
+          { letter: 'A', text: 'Shut it down immediately. Pull rank and tell Torres to follow orders or face consequences.', score: 0, tier: 'miss' },
+          { letter: 'B', text: 'Acknowledge the challenge calmly in front of the team: "Good point, Torres. Let\'s discuss this after the brief — I want to hear your perspective."', score: 20, tier: 'correct' },
+          { letter: 'C', text: 'Ignore the comment and keep talking. Don\'t give it air time.', score: 5, tier: 'partial' },
+          { letter: 'D', text: 'Agree with Torres publicly and change your decision on the spot.', score: 5, tier: 'partial' }
+        ],
+        feedbacks: {
+          correct: { icon: '🎯', result: 'Strong Call', text: 'Composure in front of the team. You acknowledged the challenge without backing down or escalating. That earns respect — not fear.', trait: '+ COMPOSURE EARNED' },
+          partial: { icon: '⚠️', result: 'Mixed Signal', text: 'Avoidance or immediate capitulation sends a confusing signal to the team. Leaders who don\'t respond get tested harder next time.', trait: '~ COMPOSURE DEVELOPING' },
+          miss:    { icon: '❌', result: 'Authority Trap', text: 'Rank gives you authority. It doesn\'t earn you trust. Shutting it down with power creates compliance — not loyalty.', trait: '– COMPOSURE MISSED' }
+        }
+      },
+      {
+        tag: 'SCENARIO 2 · UNDER PRESSURE',
+        title: 'The System Is Down',
+        text: 'It\'s 0200. A critical mission system just went offline. Your team is panicking, leadership is calling, and you don\'t have a fix yet. What do you do first?',
+        choices: [
+          { letter: 'A', text: 'Tell leadership everything you know — including that you don\'t have an answer yet — then assign clear roles to your team.', score: 20, tier: 'correct' },
+          { letter: 'B', text: 'Work the problem in silence. Don\'t update anyone until you have a solution.', score: 0, tier: 'miss' },
+          { letter: 'C', text: 'Delegate everything to your best tech and wait for them to fix it.', score: 5, tier: 'partial' },
+          { letter: 'D', text: 'Call for help from another flight before assessing what you already have.', score: 8, tier: 'partial' }
+        ],
+        feedbacks: {
+          correct: { icon: '🎯', result: 'Calm Command', text: 'Honest updates and clear role assignment during a crisis is textbook calm-under-pressure leadership. You organized the chaos.', trait: '+ CLARITY EARNED' },
+          partial: { icon: '⚠️', result: 'Partial Response', text: 'Delegation and outside help have their place — but leaders who disappear during a crisis lose the team\'s trust fast.', trait: '~ CLARITY DEVELOPING' },
+          miss:    { icon: '❌', result: 'Silence Is Costly', text: 'Going dark during an incident lets panic fill the vacuum. Leadership is most visible in what you do when nothing is certain.', trait: '– CLARITY MISSED' }
+        }
+      },
+      {
+        tag: 'SCENARIO 3 · DEVELOPING PEOPLE',
+        title: 'The Junior Airman',
+        text: 'A1C Rivera keeps making the same mistake on reports — for the third time this week. You\'ve already corrected it twice. Your supervisor is asking about Rivera\'s progress.',
+        choices: [
+          { letter: 'A', text: 'Write Rivera up. Three strikes — it\'s a discipline issue now.', score: 0, tier: 'miss' },
+          { letter: 'B', text: 'Sit down with Rivera, ask what\'s going on, explain the "why" behind the correct process, and create a simple check before submission.', score: 20, tier: 'correct' },
+          { letter: 'C', text: 'Start fixing Rivera\'s reports yourself to keep the supervisor happy.', score: 2, tier: 'miss' },
+          { letter: 'D', text: 'Assign a peer to review Rivera\'s work before it comes to you.', score: 10, tier: 'partial' }
+        ],
+        feedbacks: {
+          correct: { icon: '🎯', result: 'People Developer', text: 'You taught the why, not just the what — and created a system. That\'s the difference between managing a task and developing a person.', trait: '+ GROWTH EARNED' },
+          partial: { icon: '⚠️', result: 'Decent Workaround', text: 'Peer review helps — but it doesn\'t build Rivera\'s capability. You\'ve created a check, not a leader.', trait: '~ GROWTH DEVELOPING' },
+          miss:    { icon: '❌', result: 'Missed the Root', text: 'Discipline without understanding, or absorbing someone\'s mistakes yourself — both skip the real question: does Rivera know WHY?', trait: '– GROWTH MISSED' }
+        }
+      },
+      {
+        tag: 'SCENARIO 4 · STANDARDS VS. TEMPO',
+        title: 'The Pushback',
+        text: 'You need to implement a new cybersecurity control — patching a critical system. The mission owner says the timing is impossible and pushes back hard. Leadership is watching.',
+        choices: [
+          { letter: 'A', text: 'Back off. Mission tempo wins. You\'ll revisit next month.', score: 0, tier: 'miss' },
+          { letter: 'B', text: 'Force the patch immediately. The standard is the standard.', score: 5, tier: 'partial' },
+          { letter: 'C', text: 'Translate the cyber risk into mission terms, propose a risk-based timeline, and negotiate a window that protects both the standard and the operation.', score: 20, tier: 'correct' },
+          { letter: 'D', text: 'Escalate to your commander and let leadership decide.', score: 8, tier: 'partial' }
+        ],
+        feedbacks: {
+          correct: { icon: '🎯', result: 'Bridge Builder', text: 'You held the standard without breaking the relationship. Translating risk into mission language — that\'s how trust is built across the technical-operational gap.', trait: '+ TRANSLATION EARNED' },
+          partial: { icon: '⚠️', result: 'One-Dimensional', text: 'Rigid enforcement or full deferral both miss the point. A good leader negotiates outcomes, not rules.', trait: '~ TRANSLATION DEVELOPING' },
+          miss:    { icon: '❌', result: 'Standard Abandoned', text: 'Backing off sets a precedent: the standard is optional when people push back. That\'s how mission risk quietly compounds.', trait: '– TRANSLATION MISSED' }
+        }
+      },
+      {
+        tag: 'SCENARIO 5 · INTENT VS. CONTROL',
+        title: 'Let Them Lead',
+        text: 'Your team has a complex task due at 1600. You know exactly how you\'d do it. SSgt Chen has a different approach — it\'s unorthodox but not wrong. Do you intervene?',
+        choices: [
+          { letter: 'A', text: 'Step in and redirect Chen to your method. You\'re responsible for the outcome.', score: 0, tier: 'miss' },
+          { letter: 'B', text: 'Let Chen run it. Set a clear check-in at 1400 and stay available — but don\'t hover.', score: 20, tier: 'correct' },
+          { letter: 'C', text: 'Give Chen the task but quietly assign someone to shadow and correct if needed.', score: 5, tier: 'partial' },
+          { letter: 'D', text: 'Ask Chen to walk you through the plan first, then approve it formally before proceeding.', score: 12, tier: 'partial' }
+        ],
+        feedbacks: {
+          correct: { icon: '🎯', result: 'Empowering Leader', text: 'You set intent, created a check-in, and trusted your team. That\'s how leaders grow other leaders — and how you earn a team that doesn\'t need you to function.', trait: '+ EMPOWERMENT EARNED' },
+          partial: { icon: '⚠️', result: 'Cautious Trust', text: 'Formal approval and shadow oversight signal distrust. You\'re still controlling the outcome — just at arm\'s length.', trait: '~ EMPOWERMENT DEVELOPING' },
+          miss:    { icon: '❌', result: 'Control Override', text: 'Redirecting to your method shuts down ownership and stifles growth. The best leaders step back — especially when they\'re right.', trait: '– EMPOWERMENT MISSED' }
+        }
+      }
+    ];
+
+    const TRAITS = [
+      { key: 'composure',    icon: 'fas fa-water',        label: 'Composure' },
+      { key: 'clarity',      icon: 'fas fa-bullseye',     label: 'Clarity' },
+      { key: 'growth',       icon: 'fas fa-seedling',     label: 'Growth' },
+      { key: 'translation',  icon: 'fas fa-exchange-alt', label: 'Translation' },
+      { key: 'empowerment',  icon: 'fas fa-unlock',       label: 'Empowerment' }
+    ];
+
+    const RESULT_TIERS = [
+      { min: 90, title: '⭐ Outstanding Commander', desc: 'You led with composure, clarity, and trust. These aren\'t just right answers — they\'re the habits of a leader who\'s done the hard work.' },
+      { min: 70, title: '🎖 Solid Leader', desc: 'Strong instincts, a few rough edges. You default to the right values under pressure — now build the consistency.' },
+      { min: 45, title: '📋 Learning Leader', desc: 'You\'re developing. Some calls landed, others didn\'t — but awareness is step one. Great leaders are built, not born.' },
+      { min: 0,  title: '🔁 Starting Point', desc: 'Every great leader has made these mistakes. The fact you\'re in this game means you\'re asking the right questions.' }
+    ];
+
+    // ── State ──────────────────────────────────────────────────
+    let currentRound = 0;
+    let totalScore   = 0;
+    let traitScores  = { composure: 0, clarity: 0, growth: 0, translation: 0, empowerment: 0 };
+    const traitKeys  = ['composure', 'clarity', 'growth', 'translation', 'empowerment'];
+
+    // ── DOM refs ───────────────────────────────────────────────
+    const gameScore       = document.getElementById('gameScore');
+    const gameProgressFill= document.getElementById('gameProgressFill');
+    const gameStageLabel  = document.getElementById('gameStageLabel');
+    const screenStart     = document.getElementById('gameStart');
+    const screenPlay      = document.getElementById('gamePlay');
+    const screenEnd       = document.getElementById('gameEnd');
+    const scenarioTag     = document.getElementById('gameScenarioTag');
+    const scenarioText    = document.getElementById('gameScenarioText');
+    const choicesWrap     = document.getElementById('gameChoices');
+    const feedbackPanel   = document.getElementById('gameFeedback');
+    const feedbackIcon    = document.getElementById('feedbackIcon');
+    const feedbackResult  = document.getElementById('feedbackResult');
+    const feedbackText    = document.getElementById('feedbackText');
+    const feedbackTrait   = document.getElementById('feedbackTrait');
+    const btnStart        = document.getElementById('gameBtnStart');
+    const btnNext         = document.getElementById('gameBtnNext');
+    const resultScore     = document.getElementById('resultFinalScore');
+    const resultTitle     = document.getElementById('gameResultTitle');
+    const resultDesc      = document.getElementById('gameResultDesc');
+    const traitSummary    = document.getElementById('gameTraitSummary');
+    const btnRestart      = document.getElementById('gameBtnRestart');
+
+    if (!btnStart) return; // game not on page
+
+    // ── Helpers ────────────────────────────────────────────────
+    function showScreen(name) {
+      [screenStart, screenPlay, screenEnd].forEach(s => s.classList.add('hidden'));
+      if (name === 'start')  screenStart.classList.remove('hidden');
+      if (name === 'play')   screenPlay.classList.remove('hidden');
+      if (name === 'end')    screenEnd.classList.remove('hidden');
+    }
+
+    function updateHeader() {
+      const pct = (currentRound / SCENARIOS.length) * 100;
+      gameProgressFill.style.width = pct + '%';
+      gameStageLabel.textContent = currentRound < SCENARIOS.length
+        ? `Round ${currentRound + 1} of ${SCENARIOS.length}`
+        : 'Complete';
+    }
+
+    function bumpScore(pts) {
+      totalScore += pts;
+      gameScore.textContent = totalScore;
+      gameScore.classList.remove('bumping');
+      void gameScore.offsetWidth; // reflow
+      gameScore.classList.add('bumping');
+      setTimeout(() => gameScore.classList.remove('bumping'), 520);
+    }
+
+    // ── Load a round ────────────────────────────────────────────
+    function loadRound() {
+      const s = SCENARIOS[currentRound];
+      scenarioTag.textContent = s.tag;
+      scenarioText.innerHTML  = `<strong>${s.title}</strong>${s.text}`;
+      choicesWrap.innerHTML   = '';
+      feedbackPanel.classList.add('hidden');
+
+      s.choices.forEach((choice, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'game-choice-btn';
+        btn.innerHTML = `<span class="choice-letter">${choice.letter}</span><span>${choice.text}</span>`;
+        btn.addEventListener('click', () => handleChoice(choice, btn, s));
+        choicesWrap.appendChild(btn);
+      });
+
+      updateHeader();
+      showScreen('play');
+    }
+
+    // ── Handle a choice ─────────────────────────────────────────
+    function handleChoice(choice, clickedBtn, scenario) {
+      // Disable all buttons
+      choicesWrap.querySelectorAll('.game-choice-btn').forEach(b => {
+        b.disabled = true;
+        const tier = SCENARIOS[currentRound].choices.find(c => b.querySelector('.choice-letter').textContent === c.letter)?.tier;
+        if (tier === 'correct') b.classList.add('correct');
+        else if (tier === 'partial') b.classList.add('partial');
+        else b.classList.add('wrong');
+      });
+
+      // Score
+      const pts = choice.score;
+      if (pts > 0) bumpScore(pts);
+
+      // Track trait
+      if (currentRound < traitKeys.length) traitScores[traitKeys[currentRound]] = pts;
+
+      // Feedback
+      const fb = scenario.feedbacks[choice.tier];
+      feedbackIcon.textContent   = fb.icon;
+      feedbackResult.textContent = fb.result;
+      feedbackResult.className   = 'feedback-result ' + (choice.tier === 'correct' ? 'good' : choice.tier === 'partial' ? 'ok' : 'miss');
+      feedbackText.textContent   = fb.text;
+      feedbackTrait.textContent  = fb.trait;
+      feedbackTrait.className    = 'feedback-trait ' + (choice.tier === 'correct' ? 'good' : choice.tier === 'partial' ? 'ok' : 'miss');
+      feedbackPanel.classList.remove('hidden');
+    }
+
+    // ── Show end screen ─────────────────────────────────────────
+    function showResults() {
+      // Compute percentage (max 100 pts across 5 rounds)
+      const pct = Math.round((totalScore / 100) * 100);
+      const tier = RESULT_TIERS.find(t => pct >= t.min);
+
+      resultScore.textContent = pct;
+      resultTitle.textContent = tier.title;
+      resultDesc.textContent  = tier.desc;
+
+      // Update conic ring via inline style property
+      screenEnd.querySelector('.game-result-ring').style.setProperty('--pct', pct + '%');
+
+      // Trait chips
+      traitSummary.innerHTML = TRAITS.map((t, i) => {
+        const sc = traitScores[t.key];
+        const chipClass = sc >= 20 ? 'earned' : sc >= 8 ? 'partial' : 'missed';
+        const checkIcon = sc >= 20 ? '✓' : sc >= 8 ? '~' : '○';
+        return `<div class="trait-chip ${chipClass}"><i class="${t.icon}"></i>${t.label} ${checkIcon}</div>`;
+      }).join('');
+
+      // Update progress bar to 100%
+      gameProgressFill.style.width = '100%';
+      gameStageLabel.textContent = 'Complete';
+
+      showScreen('end');
+    }
+
+    // ── Event listeners ─────────────────────────────────────────
+    btnStart.addEventListener('click', () => {
+      currentRound = 0;
+      totalScore   = 0;
+      traitScores  = { composure: 0, clarity: 0, growth: 0, translation: 0, empowerment: 0 };
+      gameScore.textContent = '0';
+      gameProgressFill.style.width = '0%';
+      loadRound();
+    });
+
+    btnNext.addEventListener('click', () => {
+      currentRound++;
+      if (currentRound < SCENARIOS.length) {
+        loadRound();
+      } else {
+        showResults();
+      }
+    });
+
+    btnRestart.addEventListener('click', () => {
+      currentRound = 0;
+      totalScore   = 0;
+      traitScores  = { composure: 0, clarity: 0, growth: 0, translation: 0, empowerment: 0 };
+      gameScore.textContent = '0';
+      gameProgressFill.style.width = '0%';
+      gameStageLabel.textContent = 'Round 1 of 5';
+      showScreen('start');
+    });
+
+  })();
+  /* ── end game ── */
+
   console.log('%c🚀 TSgt Evelyn Davis — Leadership Journey Loaded', 'color:#00d4ff;font-size:14px;font-weight:bold;');
 
 })();
